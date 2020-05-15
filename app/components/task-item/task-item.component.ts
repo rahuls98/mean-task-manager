@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Task } from "../../models/task";
+import { TaskService } from '../../services/task.service';
 
 @Component({
   selector: 'app-task-item',
@@ -8,6 +9,7 @@ import { Task } from "../../models/task";
 })
 export class TaskItemComponent implements OnInit {
   @Input() task:Task;
+  title: string;
 
   constructor() { }
 
@@ -20,5 +22,17 @@ export class TaskItemComponent implements OnInit {
     }
 
     return classes;
+  }
+
+  onToggle(task: Task) {
+    task.isDone = !task.isDone;
+  }
+
+  onEdit(task: Task) {
+    console.log("Edit!")
+  }
+
+  onDelete(task: Task) {
+    console.log("Delete!")
   }
 }

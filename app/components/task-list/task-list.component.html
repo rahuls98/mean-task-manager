@@ -1,7 +1,14 @@
-<div class="row">
-    <div class="col-md-5">
-        <h2>Tasks</h2>
-        <app-task-item *ngFor="let task of tasks" [task]="task">
-        </app-task-item>
+<div class="container">
+    <div class="row">
+        <div class="col-md-5">
+            <h2>Tasks</h2>
+            <br>
+            <app-new-task></app-new-task>
+            
+            <app-task-item 
+                *ngFor="let task of tasks" 
+                [task]="task">
+            </app-task-item>
+        </div>
     </div>
 </div>

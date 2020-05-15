@@ -1,19 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Task } from '../models/task';
-import { Http, Response } from '@angular/http';
+import { Http, Response, Headers } from '@angular/http';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class TaskService {
-  private tasksUrl = '/api/tasks';
+  private getTasksUrl = '/api/tasks';
+  private putTaskUrl = '/api/task';
 
   constructor(private http: Http) { }
-
-  getTasks(): Promise<void | Task[]> {
-    return this.http.get(this.tasksUrl)
-               .toPromise()
-               .then(response => response.json() as Task[])
-               .catch(this.handleError);
-  }
 
   getTodos() {
     return [
@@ -21,6 +16,20 @@ export class TaskService {
       {id:'2', title:'Todo two', isDone: true},
       {id:'3', title:'Todo three', isDone: false}
     ]
+  }
+
+  getTasks(): Promise<void | Task[]> {
+    return this.http.get(this.getTasksUrl)
+               .toPromise()
+               .then(response => response.json() as Task[])
+               .catch(this.handleError);
+  }
+
+  addTask(newTask: Task): Observable<any> {
+    var headers = new Headers();
+    var body = JSON.stringify(newTask);
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(this.putTaskUrl, body, {'headers':headers});
   }
 
   private handleError (error: any) {

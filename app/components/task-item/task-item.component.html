@@ -1,4 +1,14 @@
-<li class="list-group-item" [ngClass]="setClasses()">
-    <input type="checkbox">
-    {{ task.title }}
+<li class="list-group-item">
+    <input (change)="onToggle(task)" type="checkbox">
+    <span [ngClass]="setClasses()"> {{ task.title }} </span>
+    <button type="button" 
+            (click)="onDelete(task)" 
+            class="btn btn-danger">
+            <i class="fa fa-trash"></i>
+    </button>
+    <button type="button" 
+            (click)="onEdit(task)" 
+            class="btn btn-danger">
+            <i class="fa fa-edit"></i>
+    </button>
 </li>

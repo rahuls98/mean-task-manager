@@ -1,3 +1,21 @@
+li {
+    border: none;
+    border-radius: 0 !important;
+    border-bottom: rgb(128, 128, 128, 0.2) solid 1px;
+}
+
+span {
+    padding-left: 10px;
+    font-size: 20px;
+}
+
 .is-done {
     text-decoration: line-through;
+}
+
+button {
+    padding: 2px 8px 2px 8px !important;
+    float: right;
+    font-size: 18px;
+    margin-left: 5px;
 }
