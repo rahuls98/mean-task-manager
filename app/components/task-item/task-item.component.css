@@ -4,10 +4,47 @@ li {
     border-bottom: rgb(128, 128, 128, 0.2) solid 1px;
 }
 
-span {
-    padding-left: 10px;
+#title {
     font-size: 20px;
 }
+
+.priority {
+    text-align: center;
+    background-color: black;
+    border-radius: 5px;
+    width: 30px;
+    height: 7px;
+    font-size: 1px;
+}
+
+.highPriority {
+    background-color: #DE3618;
+    color: #DE3618;
+}
+.medPriority {
+    background-color: #EEC200;
+    color: #EEC200;
+}
+.lowPriority {
+    background-color: #50B83C;
+    color: #50B83C;
+}
+
+.due {
+    font-size: 15px;
+    font-style: italic;
+}
+
+.label-badge {
+    text-align: center;
+    font-size: 18px;
+    float: right;
+    width: 70%;
+    padding: 2px 7px 2px 7px;
+    border: rgba(71, 71, 71, 0.8) solid 1px;
+    border-radius:  7px;
+    color: rgb(93, 93, 93);
+} 
 
 .is-done {
     text-decoration: line-through;

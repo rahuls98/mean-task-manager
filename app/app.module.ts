@@ -13,7 +13,7 @@ import { NewTaskComponent } from './components/new-task/new-task.component';
     AppComponent,
     TaskListComponent,
     TaskItemComponent,
-    NewTaskComponent
+    NewTaskComponent,
   ],
   imports: [
     BrowserModule,

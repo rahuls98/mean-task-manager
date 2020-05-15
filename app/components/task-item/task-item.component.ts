@@ -15,12 +15,26 @@ export class TaskItemComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  
+  setPriorityClass(task:Task) {
+    var priority = task.priority.toLowerCase();
+    let classes = {};
+    if(priority == "high") {
+      classes = {'highPriority': true};
+    }
+    else if(priority == "normal") {
+      classes = {'medPriority': true};
+    }
+    else{
+      classes = {'lowPriority': true};
+    }
+    return classes;
+  }
 
-  setClasses() {
+  setDecorClass() {
     let classes = {
       'is-done': this.task.isDone
     }
-
     return classes;
   }
 

@@ -12,9 +12,9 @@ export class TaskService {
 
   getTodos() {
     return [
-      {id:'1', title:'Todo one', isDone: false},
-      {id:'2', title:'Todo two', isDone: true},
-      {id:'3', title:'Todo three', isDone: false}
+      {id:'1', title:"finish project", dueDate:"2020-05-15T10:31:43.772Z", priority:"low", label:"work", status:"new", isDone:false},
+      {id:'2', title:"submit assignment", dueDate:"2020-05-15T10:31:43.772Z", priority:"normal", label:"shopping", status:"in progress", isDone:false},
+      {id:'3', title:"walk the dog", dueDate:"2020-05-15T10:31:43.772Z", priority:"high", label:"other", status:"completed", isDone:false}
     ]
   }
 

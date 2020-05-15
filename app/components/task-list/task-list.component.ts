@@ -15,12 +15,12 @@ export class TaskListComponent implements OnInit {
   constructor(private taskService: TaskService) { }
 
   ngOnInit() {
-    this.taskService.getTasks().then((tasks: Task[]) => {
+    /* this.taskService.getTasks().then((tasks: Task[]) => {
       this.tasks = tasks.map((task) => {
         return task;
       });
-    });
+    }); */
 
-    //this.tasks = this.taskService.getTodos();
+    this.tasks = this.taskService.getTodos();
   }
 }
