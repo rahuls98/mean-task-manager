@@ -46,6 +46,19 @@ li {
     color: rgb(93, 93, 93);
 } 
 
+.purple {
+    border: #50248F solid 2px;
+}
+.blue {
+    border: #006FBB solid 2px;
+}
+.teal {
+    border: #47C1BF solid 2px;
+}
+.orange {
+    border: #C05717 solid 2px;
+}
+
 .is-done {
     text-decoration: line-through;
 }

@@ -32,7 +32,7 @@ export class NewTaskComponent implements OnInit {
                   };
 
     this.taskService.addTask(newTask).subscribe(data => {
-      window.alert("Insertion complete!")
+      //window.alert("Insertion complete!")
     });
   }
 }

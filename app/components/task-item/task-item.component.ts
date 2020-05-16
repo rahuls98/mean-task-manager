@@ -10,14 +10,24 @@ import { TaskService } from '../../services/task.service';
 export class TaskItemComponent implements OnInit {
   @Input() task:Task;
   title: string;
+  isChecked: boolean;
 
-  constructor() { }
+  labels = {
+    'personal':'purple',
+    'work':'blue',
+    'shopping':'teal',
+    'other':'orange'
+  };
+
+  constructor(private taskService: TaskService) { }
 
   ngOnInit(): void {
+    if(this.task.isDone) this.isChecked = true;
+    else this.isChecked = false;
   }
   
-  setPriorityClass(task:Task) {
-    var priority = task.priority.toLowerCase();
+  setPriorityClass() {
+    var priority = this.task.priority.toLowerCase();
     let classes = {};
     if(priority == "high") {
       classes = {'highPriority': true};
@@ -38,15 +48,28 @@ export class TaskItemComponent implements OnInit {
     return classes;
   }
 
-  onToggle(task: Task) {
-    task.isDone = !task.isDone;
+  setLabelClass() {
+    var label = this.task.label.toLowerCase();
+    var colorClass = this.labels[label];
+    let classes = {}
+    classes[colorClass] = true;
+    return classes;
   }
 
-  onEdit(task: Task) {
+  onToggle() {
+    this.task.isDone = !this.task.isDone;
+    var taskStatus = { status: this.task.isDone };
+    this.taskService.updateStatus(this.task._id, taskStatus).subscribe(data => {});
+  }
+
+  onEdit() {
     console.log("Edit!")
   }
 
-  onDelete(task: Task) {
-    console.log("Delete!")
+  deleteTask() {
+    console.log(this.task._id);
+    this.taskService.deleteTask(this.task._id).subscribe(data => {
+      //window.alert("Deletion complete!")
+    });
   }
 }

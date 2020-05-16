@@ -1,24 +1,25 @@
 <li class="list-group-item">
         <div class="row">
-                <div class="col-1"><input (change)="onToggle(task)" type="checkbox"></div>
+                <div class="col-1"><input (change)="onToggle()" type="checkbox" [(ngModel)]="isChecked"></div>
                 <div class="col-7">
                         <span id="title" [ngClass]="setDecorClass()"> {{ task.title }} </span>
-                        <div class="priority" [ngClass]="setPriorityClass(task)">.</div>
+                        <div class="priority" [ngClass]="setPriorityClass()">.</div>
                         <span class="due">{{ "Due: " + task.dueDate.substring(5,7) + "/" +task.dueDate.substring(8,10) }}</span>
                 </div>
                 <div class="col-2">
-                        <span class="label-badge">
+                        <span class="label-badge" [ngClass]="setLabelClass()">
                                 {{ task.label | lowercase }}
                         </span>
                 </div>
                 <div class="col-2"><button type="button" 
-                        (click)="onDelete(task)" 
-                        class="btn btn-outline-danger">
+                        (click)="deleteTask()" 
+                        class="btn btn-danger">
                         <i class="fa fa-trash"></i>
                 </button>
                 <button type="button" 
-                        (click)="onEdit(task)" 
-                        class="btn btn-outline-danger">
+                        (click)="onEdit()" 
+                        data-toggle="modal" data-target="#update-task"
+                        class="btn btn-danger">
                         <i class="fa fa-edit"></i>
                 </button></div>
         </div>

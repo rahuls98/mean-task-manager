@@ -5,18 +5,20 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class TaskService {
-  private getTasksUrl = '/api/tasks';
-  private putTaskUrl = '/api/task';
+  private getTasksUrl = 'http://localhost:8000/api/readTasks';
+  private postTaskUrl = 'http://localhost:8000/api/createTask';
+  private putStatusUrl = 'http://localhost:8000/api/updateTaskStatus/';
+  private delTaskUrl = 'http://localhost:8000/api/deleteTask/'
 
   constructor(private http: Http) { }
 
-  getTodos() {
+  /* getTodos() {
     return [
       {id:'1', title:"finish project", dueDate:"2020-05-15T10:31:43.772Z", priority:"low", label:"work", status:"new", isDone:false},
       {id:'2', title:"submit assignment", dueDate:"2020-05-15T10:31:43.772Z", priority:"normal", label:"shopping", status:"in progress", isDone:false},
       {id:'3', title:"walk the dog", dueDate:"2020-05-15T10:31:43.772Z", priority:"high", label:"other", status:"completed", isDone:false}
     ]
-  }
+  } */
 
   getTasks(): Promise<void | Task[]> {
     return this.http.get(this.getTasksUrl)
@@ -29,7 +31,18 @@ export class TaskService {
     var headers = new Headers();
     var body = JSON.stringify(newTask);
     headers.append('Content-Type', 'application/json');
-    return this.http.post(this.putTaskUrl, body, {'headers':headers});
+    return this.http.post(this.postTaskUrl, body, {'headers':headers});
+  }
+
+  deleteTask(delTaskId: String): Observable<any> {
+    return this.http.delete(this.delTaskUrl + delTaskId);
+  }
+
+  updateStatus(updTaskId: String, status: Object): Observable<any> {
+    var headers = new Headers();
+    var body = JSON.stringify(status);
+    headers.append('Content-Type', 'application/json');
+    return this.http.put(this.putStatusUrl + updTaskId, body, {'headers':headers});
   }
 
   private handleError (error: any) {
