@@ -1,0 +1,14 @@
+.modal-content {
+    padding: 50px !important;
+    font-size: 20px;
+}
+
+.modal-close-btn {
+    float: right;
+}
+
+input {
+    border: rgb(128, 128, 128, 0.2) solid 1px;
+    border-radius: 5px;
+    padding: 10px;
+}

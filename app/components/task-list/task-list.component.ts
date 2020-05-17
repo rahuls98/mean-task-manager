@@ -11,6 +11,12 @@ import { TaskService } from '../../services/task.service';
 
 export class TaskListComponent implements OnInit {
   tasks: Task[];
+  _id:string;
+  title:string;
+  dueDate:string;
+  priority:string;
+  label:string;
+  status:string;
 
   constructor(private taskService: TaskService) { }
 
@@ -20,7 +26,15 @@ export class TaskListComponent implements OnInit {
         return task;
       });
     });
+  }
 
-    //this.tasks = this.taskService.getTodos();
+  receiveDetails($event) {
+    var details = $event.split('|');
+    this._id = details[0];
+    this.title = details[1];
+    this.dueDate = details[2];
+    this.priority = details[3];
+    this.label = details[4];
+    this.status = details[5];
   }
 }

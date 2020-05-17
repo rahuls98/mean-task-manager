@@ -5,11 +5,18 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class TaskService {
-  private getTasksUrl = 'http://localhost:8000/api/readTasks';
-  private postTaskUrl = 'http://localhost:8000/api/createTask';
-  private putStatusUrl = 'http://localhost:8000/api/updateTaskStatus/';
-  private delTaskUrl = 'http://localhost:8000/api/deleteTask/'
+  //private getTasksUrl = 'http://localhost:8000/api/readTasks';
+  //private postTaskUrl = 'http://localhost:8000/api/createTask';
+  //private putStatusUrl = 'http://localhost:8000/api/updateTaskStatus/';
+  //private putTaskUrl = 'http://localhost:8000/api/updateTask/';
+  //private delTaskUrl = 'http://localhost:8000/api/deleteTask/'
 
+  private getTasksUrl = '/api/readTasks';
+  private postTaskUrl = '/api/createTask';
+  private putStatusUrl = '/api/updateTaskStatus/'
+  private putTaskUrl = '/api/updateTask/';
+  private delTaskUrl = '/api/deleteTask/'
+  
   constructor(private http: Http) { }
 
   /* getTodos() {
@@ -43,6 +50,14 @@ export class TaskService {
     var body = JSON.stringify(status);
     headers.append('Content-Type', 'application/json');
     return this.http.put(this.putStatusUrl + updTaskId, body, {'headers':headers});
+  }
+
+  updateTask(updTaskId: String, updateFields: Object) {
+    var headers = new Headers();
+    var body = JSON.stringify(updateFields);
+    headers.append('Content-Type', 'application/json');
+    console.log("PUT request to change: "+updTaskId+", changes: "+updateFields);
+    return this.http.put(this.putTaskUrl + updTaskId, body, {'headers':headers});
   }
 
   private handleError (error: any) {

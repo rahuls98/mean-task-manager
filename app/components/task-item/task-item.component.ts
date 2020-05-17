@@ -1,14 +1,17 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Task } from "../../models/task";
 import { TaskService } from '../../services/task.service';
 
 @Component({
   selector: 'app-task-item',
   templateUrl: './task-item.component.html',
-  styleUrls: ['./task-item.component.css']
+  styleUrls: ['./task-item.component.css'],
+  providers: [TaskService]
 })
 export class TaskItemComponent implements OnInit {
   @Input() task:Task;
+
+  details: string;
   title: string;
   isChecked: boolean;
 
@@ -16,8 +19,10 @@ export class TaskItemComponent implements OnInit {
     'personal':'purple',
     'work':'blue',
     'shopping':'teal',
-    'other':'orange'
+    'others':'orange'
   };
+
+  @Output() transferDetails = new EventEmitter<string>();
 
   constructor(private taskService: TaskService) { }
 
@@ -26,25 +31,30 @@ export class TaskItemComponent implements OnInit {
     else this.isChecked = false;
   }
   
-  setPriorityClass() {
-    var priority = this.task.priority.toLowerCase();
-    let classes = {};
-    if(priority == "high") {
-      classes = {'highPriority': true};
-    }
-    else if(priority == "normal") {
-      classes = {'medPriority': true};
-    }
-    else{
-      classes = {'lowPriority': true};
-    }
-    return classes;
+  onToggle() {
+    this.task.isDone = !this.task.isDone;
+    var taskStatus = { status: this.task.isDone };
+    this.taskService.updateStatus(this.task._id, taskStatus).subscribe(data => {});
   }
 
   setDecorClass() {
     let classes = {
       'is-done': this.task.isDone
     }
+    return classes;
+  }
+
+  setPriorityClass() {
+    var priority = this.task.priority.toLowerCase();
+    let classes = {};
+
+    if(priority == "high") 
+      classes = {'highPriority': true};
+    else if(priority == "medium") 
+      classes = {'medPriority': true};
+    else 
+      classes = {'lowPriority': true};
+
     return classes;
   }
 
@@ -56,20 +66,21 @@ export class TaskItemComponent implements OnInit {
     return classes;
   }
 
-  onToggle() {
-    this.task.isDone = !this.task.isDone;
-    var taskStatus = { status: this.task.isDone };
-    this.taskService.updateStatus(this.task._id, taskStatus).subscribe(data => {});
-  }
-
-  onEdit() {
-    console.log("Edit!")
+  editTask() {
+    console.log("Edit!");
+    this.details = this.task._id 
+                  + '|' + this.task.title
+                  + '|' + this.task.dueDate
+                  + '|' + this.task.priority
+                  + '|' + this.task.label
+                  + '|' + this.task.status;
+    this.transferDetails.emit(this.details)
   }
 
   deleteTask() {
     console.log(this.task._id);
     this.taskService.deleteTask(this.task._id).subscribe(data => {
-      //window.alert("Deletion complete!")
+      window.location.reload();
     });
   }
 }

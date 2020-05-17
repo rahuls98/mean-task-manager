@@ -8,6 +8,6 @@ h2 {
 
 .task-list {
     border: grey solid 1px; 
-    padding: 0 10px 0 10px;
+    padding: 0 10px 30px 10px;
     border-radius: 10px;
 }

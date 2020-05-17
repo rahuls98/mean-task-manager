@@ -102,3 +102,28 @@ app.put("/api/updateTaskStatus/:id", function(req, res) {
         });
     }
 });
+
+app.put("/api/updateTask/:id", function(req, res) {
+    var docId = req.params.id;
+    var updateDetails = req.body;
+    var fields = Object.keys(updateDetails);
+
+    if(fields.length == 0) 
+        console.log("No update fields provided!");
+
+    else {
+        console.log("Updating fields: ", fields);
+        var obj = {};
+        fields.forEach(field => {
+            obj[field] = updateDetails[field];
+        });
+        db.collection(COLLECTION).updateOne({_id: new ObjectID(docId)}, {$set: obj}, function(err, result) {
+            if(err) res.send("Failed to update task:\n"+ err);
+
+            else {
+                console.log("Updated task!");
+                res.status(200).json(docId);
+            }
+        });
+    }
+})

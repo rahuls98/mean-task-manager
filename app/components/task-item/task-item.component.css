@@ -1,6 +1,9 @@
 li {
     border: none;
-    border-radius: 0 !important;
+}
+
+.row {
+    padding-bottom: 3px;
     border-bottom: rgb(128, 128, 128, 0.2) solid 1px;
 }
 
@@ -43,24 +46,26 @@ li {
     padding: 2px 7px 2px 7px;
     border: rgba(71, 71, 71, 0.8) solid 1px;
     border-radius:  7px;
-    color: rgb(93, 93, 93);
+    color: white;
 } 
 
 .purple {
-    border: #50248F solid 2px;
+    background: #50248F;
 }
 .blue {
-    border: #006FBB solid 2px;
+    background: #006FBB;
 }
 .teal {
-    border: #47C1BF solid 2px;
+    background: #47C1BF;
 }
 .orange {
-    border: #C05717 solid 2px;
+    background: #C05717;
 }
 
 .is-done {
     text-decoration: line-through;
+    opacity: 0.8;
+    transition: 0.5s;
 }
 
 button {

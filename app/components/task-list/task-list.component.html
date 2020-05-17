@@ -6,8 +6,16 @@
             <h2>Tasks</h2>
             <br>
             <div class="task-list">
-                <app-task-item *ngFor="let task of tasks" [task]="task">
+                <app-task-item *ngFor="let task of tasks" [task]="task"
+                               (transferDetails)="receiveDetails($event)">
                 </app-task-item>
+                <app-update-task [_id]="_id"
+                                 [title]="title"
+                                 [dueDate]="dueDate"
+                                 [priority]="priority"
+                                 [label]="label"
+                                 [status]="status">   
+                </app-update-task>
             </div>
         </div>
     </div>
