@@ -1,6 +1,8 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var cors = require('cors');
+var url = require('url');
+var querystring = require('querystring');
 
 var mongodb = require('mongodb');
 var ObjectID = mongodb.ObjectID;
@@ -126,4 +128,46 @@ app.put("/api/updateTask/:id", function(req, res) {
             }
         });
     }
+})
+
+app.get("/api/findTask/:searchText", function(req, res) {
+    var searchText = req.params.searchText;
+    console.log(searchText);
+    var pattern = "";
+    var words = searchText.split(' ');
+    words.forEach(word => {
+        pattern += "(.*" + word + ")"
+    });
+    console.log(pattern);
+    db.collection(COLLECTION).find({title: {$regex: pattern, $options:"i"}}).toArray(function(err, tasks) {
+        if(err) 
+            res.send("Failed to find task:\n"+ err);
+        else {
+            console.log("Retrieved search results!");
+            res.status(200).json(tasks);
+        }
+    });
+})
+
+app.get("/api/findTask2/", function(req, res) {
+    var obj = req.query;
+    var pattern = "";
+
+    if(req.query.title) {
+        var words = req.query.title.split(' ');
+        words.forEach(word => {
+            pattern += "(.*" + word + ")"
+        });
+        obj.title = {$regex: pattern, $options:"i"};
+    }
+    
+    console.log(obj);
+    db.collection(COLLECTION).find(obj).toArray(function(err, tasks) {
+        if(err) 
+            res.send("Failed to find task:\n"+ err);
+        else {
+            console.log("Retrieved search results!");
+            res.status(200).json(tasks);
+        }
+    });
 })
