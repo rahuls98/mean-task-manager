@@ -5,17 +5,19 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class TaskService {
-  //private getTasksUrl = 'http://localhost:8000/api/readTasks';
-  //private postTaskUrl = 'http://localhost:8000/api/createTask';
-  //private putStatusUrl = 'http://localhost:8000/api/updateTaskStatus/';
-  //private putTaskUrl = 'http://localhost:8000/api/updateTask/';
-  //private delTaskUrl = 'http://localhost:8000/api/deleteTask/'
+  private getTasksUrl = 'http://localhost:8000/api/readTasks';
+  private postTaskUrl = 'http://localhost:8000/api/createTask';
+  private putStatusUrl = 'http://localhost:8000/api/updateTaskStatus/';
+  private putTaskUrl = 'http://localhost:8000/api/updateTask/';
+  private delTaskUrl = 'http://localhost:8000/api/deleteTask/';
+  private searchTaskUrl = 'http://localhost:8000/api/findTask/';
+  private searchTaskUrl2 = 'http://localhost:8000/api/findTask2/';
 
-  private getTasksUrl = '/api/readTasks';
-  private postTaskUrl = '/api/createTask';
-  private putStatusUrl = '/api/updateTaskStatus/'
-  private putTaskUrl = '/api/updateTask/';
-  private delTaskUrl = '/api/deleteTask/'
+  //private getTasksUrl = '/api/readTasks';
+  //private postTaskUrl = '/api/createTask';
+  //private putStatusUrl = '/api/updateTaskStatus/'
+  //private putTaskUrl = '/api/updateTask/';
+  //private delTaskUrl = '/api/deleteTask/'
   
   constructor(private http: Http) { }
 
@@ -58,6 +60,20 @@ export class TaskService {
     headers.append('Content-Type', 'application/json');
     console.log("PUT request to change: "+updTaskId+", changes: "+updateFields);
     return this.http.put(this.putTaskUrl + updTaskId, body, {'headers':headers});
+  }
+
+  searchTask(searchText: string): Promise<void | Task[]> {
+    return this.http.get(this.searchTaskUrl + searchText)
+               .toPromise()
+               .then(response => response.json() as Task[])
+               .catch(this.handleError);
+  }
+
+  searchTask2(searchQuery: string): Promise<void | Task[]> {
+    return this.http.get(this.searchTaskUrl2 + searchQuery)
+               .toPromise()
+               .then(response => response.json() as Task[])
+               .catch(this.handleError);
   }
 
   private handleError (error: any) {

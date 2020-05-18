@@ -8,6 +8,7 @@ import { TaskListComponent } from './components/task-list/task-list.component';
 import { TaskItemComponent } from './components/task-item/task-item.component';
 import { NewTaskComponent } from './components/new-task/new-task.component';
 import { UpdateTaskComponent } from './components/update-task/update-task.component';
+import { SearchBarComponent } from './components/search-bar/search-bar.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { UpdateTaskComponent } from './components/update-task/update-task.compon
     TaskItemComponent,
     NewTaskComponent,
     UpdateTaskComponent,
+    SearchBarComponent
   ],
   imports: [
     BrowserModule,

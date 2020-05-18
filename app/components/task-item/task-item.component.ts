@@ -16,10 +16,10 @@ export class TaskItemComponent implements OnInit {
   isChecked: boolean;
 
   labels = {
-    'personal':'purple',
-    'work':'blue',
-    'shopping':'teal',
-    'others':'orange'
+    'personal':'l-28c7fa',
+    'work':'l-775ada',
+    'shopping':'l-002651',
+    'others':'l-ff304f'
   };
 
   @Output() transferDetails = new EventEmitter<string>();

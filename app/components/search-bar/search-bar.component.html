@@ -1,0 +1,74 @@
+<div class="card card-body">
+    <form (submit)="onSubmit($event)">
+        <h3>Search using:</h3>
+        <div class="form-row">
+            <div class="col-12">
+                <input class="form-control" [(ngModel)]="searchTitle" name="searchTitle" type="text" placeholder="Title/Keywords">
+            </div>
+        </div>
+        <br>
+        <div class="form-row">
+            <div class="input-group col-4">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="priority">Priority</label>
+                </div>
+                <select class="custom-select mr-sm-2" [(ngModel)]="searchPriority" name="searchPriority" id="searchPriority">
+                    <option value="High">High</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Low">Low</option>
+                </select>
+            </div>
+            <div class="input-group col-4">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="priority">Label</label>
+                </div>
+                <select class="custom-select mr-sm-2" [(ngModel)]="searchLabel" name="searchLabel" id="searchLabel">
+                    <option value="Personal">Personal</option>
+                    <option value="Work">Work</option>
+                    <option value="Shopping">Shopping</option>
+                    <option value="Others">Others</option>
+                </select>
+            </div>
+            <div class="input-group col-4">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="priority">Status</label>
+                </div>
+                <select class="custom-select mr-sm-2" [(ngModel)]="searchStatus" name="searchStatus" id="searchStatus">
+                    <option value="New">New</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Completed">Completed</option>
+                </select>
+            </div>
+        </div>
+        <br>
+        <div class="form-row">
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#search-results">
+                    <i class="fa fa-search"></i>
+                </button>
+            </div>
+        </div>
+    </form>
+
+    <div class="modal fade bd-example-modal-lg" id="search-results" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <h5 class="modal-title">
+                    Search results 
+                    <span class="modal-close-btn" data-dismiss="modal"><i class="fa fa-times"></i></span>
+                </h5>
+                <br>
+                <div class="modal-body" *ngFor="let result of searchResults">
+                    <app-task-item [task]="result"
+                        (transferDetails)="receiveDetails($event)">
+                    </app-task-item>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- 
+    <app-update-task [_id]="_id" [title]="title" [dueDate]="dueDate"
+                    [priority]="priority" [label]="label" [status]="status">   
+    </app-update-task> -->
+</div>
+    

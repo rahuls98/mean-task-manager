@@ -1,22 +1,31 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <app-new-task></app-new-task>
-            <br>
+            <div class="row">
+                <app-new-task class="col-2"></app-new-task>
+                <p class="col-2">
+                    <button class="btn btn-outline-primary" type="button" 
+                            data-toggle="collapse" data-target="#searchBar">
+                        Search
+                    </button>
+                </p>
+            </div>
+            <div class="row">
+                <app-search-bar class="collapse col" id="searchBar"
+                                (transferDetails)="receiveDetails($event)">
+                </app-search-bar>
+            </div>
             <h2>Tasks</h2>
             <br>
             <div class="task-list">
                 <app-task-item *ngFor="let task of tasks" [task]="task"
                                (transferDetails)="receiveDetails($event)">
                 </app-task-item>
-                <app-update-task [_id]="_id"
-                                 [title]="title"
-                                 [dueDate]="dueDate"
-                                 [priority]="priority"
-                                 [label]="label"
-                                 [status]="status">   
-                </app-update-task>
             </div>
         </div>
     </div>
+
+    <app-update-task [_id]="_id" [title]="title" [dueDate]="dueDate"
+                    [priority]="priority" [label]="label" [status]="status">   
+    </app-update-task>
 </div>
