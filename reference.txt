@@ -8,3 +8,4 @@
 - ng generate component components/task-item
 - ng generate component components/new-task
 - ng generate service services/task
+- npm install @angular/http@latest
