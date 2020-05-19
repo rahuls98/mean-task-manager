@@ -1,0 +1,17 @@
+<flash-messages></flash-messages>
+<ng-container *ngIf="user; then loggedIn; else unauthorized"></ng-container>
+
+<ng-template #loggedIn>
+    <body [ngClass]="toggleTheme()">
+        <div class="container-fluid">
+            <div class="row">
+                <app-profile-sidenav [name]="user.name" [username]="user.username" class="col-4"></app-profile-sidenav>
+                <app-profile-body class="col-8"></app-profile-body>
+            </div>
+        </div>
+    </body>
+</ng-template>
+
+<ng-template #unauthorized>
+    <h2>Unauthorized!!!</h2>
+</ng-template>

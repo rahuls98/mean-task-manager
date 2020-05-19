@@ -1,0 +1,26 @@
+body {transition: 0.7s;
+}
+
+app-profile-sidenav {
+    height: 100vh;
+    background: whitesmoke;
+    color: black;
+    transition: 0.7s;
+}
+
+.darkTheme {
+    background: rgb(59, 59, 59);
+    color: white;
+    transition: 0.5s;
+}
+
+.darkTheme app-profile-sidenav {
+    background: rgb(22, 22, 22);
+    color: white;
+    transition: 0.5s;
+}
+
+app-profile-body {
+    height: 100vh;
+    overflow: scroll;
+}

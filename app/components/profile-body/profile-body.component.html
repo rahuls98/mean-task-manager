@@ -1,0 +1,47 @@
+<div class="container">
+    <br>
+    <div class="row" id="toggleContainer">
+        <label class="switch">
+            <input type="checkbox" #toggleSwitch (change)="onModeToggle()"><span class="slider round"></span>
+        </label>
+    </div>
+    <br><br>
+    <div class="row" id="optionGroup">
+        <button class="btn btn-outline-primary" data-toggle="modal" data-target="#new-task" type="button">Add task</button>
+        <button class="btn btn-outline-primary" data-toggle="collapse" data-target="#searchBar" type="button">Search</button>
+        <div class="dropdown">
+            <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter by</button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#">Priority</a>
+                <a class="dropdown-item" href="#">Label</a>
+                <a class="dropdown-item" href="#">Status</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sort by</button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#">Due date</a>
+            </div>
+        </div>
+    </div>
+
+    <app-add-task></app-add-task>
+    <div class="row">
+        <app-search-bar class="collapse col" id="searchBar"></app-search-bar>
+    </div>
+    <div class="dropdown">
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+        </div>
+
+    <hr class="my-4">
+    
+    <h2>{{ title }}</h2>
+    <br>
+    <div class="row" id="taskContainer"></div>
+    <br>
+
+</div>

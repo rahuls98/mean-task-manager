@@ -1,0 +1,19 @@
+<app-navbar></app-navbar>
+<div class="container">
+    <flash-messages></flash-messages>
+    <div class="col-5 m-auto">
+        <form class="form-signin" (submit)="onRegisterSubmit($event)">
+            <h1 class="h3 mb-3 font-weight-normal" style="text-align: center;">Register</h1>
+            <hr class="my-4">
+            <input type="text" id="inputName" [(ngModel)]="name" name="name" class="form-control" placeholder="Name" required autofocus  autocomplete="off">
+            <br>
+            <input type="text" id="inputUsername" [(ngModel)]="username" name="username" class="form-control" placeholder="Username" required autofocus  autocomplete="off">
+            <br>
+            <input type="email" id="inputEmail" [(ngModel)]="email" name="email" class="form-control" placeholder="Email address" required autofocus  autocomplete="off">
+            <br>
+            <input type="password" id="inputPassword" [(ngModel)]="password" name="password" class="form-control" placeholder="Password" required>
+            <br>
+            <button class="col-3 m-auto btn btn-lg btn-outline-primary btn-block" type="submit">Register</button>
+        </form>
+    </div>
+</div>

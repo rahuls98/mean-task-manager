@@ -1,0 +1,30 @@
+.sidenav-contents {
+    position: relative;
+    height: 100%;
+    justify-content: center;
+}
+
+.profile-block {
+    text-align: center;
+    justify-content: center;
+}
+
+#profilePicture {
+    display: block;
+    margin: 0 !important;
+    width: 150px;
+    height: 150px;
+    background: grey;
+    border-radius: 50%;
+}
+
+.logoutButton {
+    position: absolute;
+    bottom: 30px;
+    width: inherit;
+    justify-content: center;
+}
+
+button {
+    width: 100px;
+}
