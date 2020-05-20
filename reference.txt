@@ -5,7 +5,5 @@
 - mkdir src/app/components
 - ng generate class models/task
 - ng generate component components/task-list
-- ng generate component components/task-item
-- ng generate component components/new-task
 - ng generate service services/task
 - npm install @angular/http@latest
