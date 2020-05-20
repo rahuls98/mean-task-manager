@@ -41,7 +41,14 @@
     
     <h2>{{ title }}</h2>
     <br>
-    <div class="row" id="taskContainer"></div>
+    <ng-container *ngIf="tasks; then allTasks; else emptyList"></ng-container>
+    <ng-template #allTasks>
+        <div class="container" id="taskContainer">
+            <div *ngFor="let task of tasks">
+                <app-task-item [task]="task"></app-task-item>
+            </div>
+        </div>
+    </ng-template>
+    <ng-template #emptyList><div id="taskContainer">NO TASKS!</div></ng-template>
     <br>
-
 </div>

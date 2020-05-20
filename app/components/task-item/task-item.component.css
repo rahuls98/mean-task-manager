@@ -1,0 +1,31 @@
+.list-group-item {
+    border: none;
+    border-bottom: rgb(58, 58, 58, 0.5) solid 1px;
+}
+
+.priority {
+    display: inline;
+    padding: 3px 10px 3px 10px;
+    background: rgb(248, 162, 2, 0.5);
+    border-radius: 10px;
+    font-size: 15px;
+}
+
+.strikeThrough {
+    text-decoration: line-through;
+    opacity: 0.8;
+    transition: 0.6s;
+}
+
+/* #DE3618
+#EEC200
+#50B83C */
+.highPriority{
+    background: rgba(222, 54, 24, 0.5);
+}
+.medPriority{
+    background: rgba(238, 194, 0, 0.5);
+}
+.lowPriority{
+    background: rgba(81, 184, 60, 0.5);
+}

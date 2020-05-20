@@ -16,8 +16,8 @@ interface Options {
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  //user:Options;
-  user:Options = {name: "Rahul Suresh",username: "rahs98",email: "rahs98@gmail.com"};
+  user:Options;
+  //user:Options = {name: "Rahul Suresh",username: "rahs98",email: "rahs98@gmail.com"};
 
   constructor(
     private authService: AuthService,
@@ -27,12 +27,12 @@ export class ProfileComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    /* this.authService.getProfile().subscribe(profile => {
+    this.authService.getProfile().subscribe(profile => {
       this.user = profile.user;
     }, err => { 
       console.log(err); 
       return false; }
-    ); */
+    );
   }
 
   toggleTheme() {

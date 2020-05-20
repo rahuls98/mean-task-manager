@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class GlobalVarsService {
-  mode:boolean;
+  mode:boolean; //toggle for the app theme
 
   constructor() { }
 

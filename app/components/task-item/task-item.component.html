@@ -1,0 +1,31 @@
+<div class="container">
+    <li class="list-group-item">
+        <div class="row">
+            <div class="col-1">
+                <input class="form-check-input" type="checkbox" id="check" 
+                       (change)="toggleStatus()" [(ngModel)]="isChecked">
+            </div>
+            <div class="col-10">
+                <h5 id="title" [ngClass]="setCompletedClass()">{{ task.title }}
+                    <!-- <span><i class="fa fa-tag"></i></span> -->
+                </h5>
+                <div id="dueDate">
+                    <div class="priority" [ngClass]="setPriorityClass()">
+                        <i>{{ "Due " + task.dueDate.toString().substring(8,10) 
+                            + "/" + task.dueDate.toString().substring(5,7) }}</i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-1 dropdown my-auto">
+                <button class="btn btn-outline-danger" type="button" id="dropdownMenu2" data-toggle="dropdown">
+                    <i class="fa fa-ellipsis-h" style="font-size:20px;"></i>
+                </button>
+                <div class="dropdown-menu dropdown-menu-middle" aria-labelledby="dropdownMenu2">
+                    <button class="dropdown-item" type="button">View</button>
+                    <button class="dropdown-item" type="button">Edit</button>
+                    <button class="dropdown-item" type="button">Delete</button>
+                </div>
+            </div>
+        </div>
+    </li>
+</div>
