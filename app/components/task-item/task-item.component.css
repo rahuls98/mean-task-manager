@@ -1,6 +1,6 @@
 .list-group-item {
     border: none;
-    border-bottom: rgb(58, 58, 58, 0.5) solid 1px;
+    border-bottom: rgb(58, 58, 58, 0.2) solid 1px;
 }
 
 .priority {
@@ -28,4 +28,44 @@
 }
 .lowPriority{
     background: rgba(81, 184, 60, 0.5);
+}
+
+.label {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: transparent;
+    text-align: center;
+    color: black;
+    font-size: 25px;
+}
+.label span {
+    vertical-align: center;
+}
+.l-ff304f {
+    color: #ff304f;
+}
+.l-002651 {
+    color: #002651;
+}
+.l-107a8b {
+    color: #107a8b;
+}
+.l-85203b {
+    color: #85203b;
+}
+
+#taskOptions {
+    border-radius: 50%;
+    background: transparent;
+    width: 35px;
+    height: 35px;
+}
+
+#taskOptions:focus {
+    outline: none;
+}
+
+#taskOptions i {
+    vertical-align: middle;
 }

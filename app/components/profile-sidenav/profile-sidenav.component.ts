@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 export class ProfileSidenavComponent implements OnInit {
   @Input() name:string = "";
   @Input() username:string = "";
+  width = '20%';
 
   constructor(
     private authService: AuthService,

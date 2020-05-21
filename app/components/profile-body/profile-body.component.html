@@ -6,49 +6,80 @@
         </label>
     </div>
     <br><br>
-    <div class="row" id="optionGroup">
-        <button class="btn btn-outline-primary" data-toggle="modal" data-target="#new-task" type="button">Add task</button>
-        <button class="btn btn-outline-primary" data-toggle="collapse" data-target="#searchBar" type="button">Search</button>
-        <div class="dropdown">
-            <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter by</button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">Priority</a>
-                <a class="dropdown-item" href="#">Label</a>
-                <a class="dropdown-item" href="#">Status</a>
+    <ng-container *ngIf="options; then showOptions; else noOptions"></ng-container>
+    <ng-template #showOptions>
+        <div class="row" id="optionGroup">
+            <button class="btn btn-outline-primary" data-toggle="modal" data-target="#new-task" type="button">Add task</button>
+            <button class="btn btn-outline-primary" data-toggle="collapse" data-target="#searchBar" type="button">Search</button>
+            <div class="dropdown">
+                <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter by</button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" (click)="getResults('Filter','Priority')">Priority</a>
+                    <a class="dropdown-item" (click)="getResults('Filter','Label')">Label</a>
+                    <a class="dropdown-item" (click)="getResults('Filter','Status')">Status</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sort by</button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" (click)="getResults('Sort','dueDate')">Due date</a>
+                </div>
             </div>
         </div>
-        <div class="dropdown">
-            <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sort by</button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">Due date</a>
-            </div>
+    </ng-template>
+
+    <ng-template #noOptions>
+        <div class="row" id="optionGroup">
+            <!-- <div class="dropdown">
+                <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter by</button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" (click)="getResults('Filter','Priority')">Priority</a>
+                    <a class="dropdown-item" (click)="getResults('Filter','Label')">Label</a>
+                    <a class="dropdown-item" (click)="getResults('Filter','Status')">Status</a>
+                </div>
+            </div> -->
+            <button class="btn btn-outline-primary" type="button" (click)="backToDefault()">Back</button>
         </div>
-    </div>
+    </ng-template>
 
     <app-add-task></app-add-task>
     <div class="row">
         <app-search-bar class="collapse col" id="searchBar"></app-search-bar>
     </div>
-    <div class="dropdown">
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-        </div>
-
     <hr class="my-4">
     
     <h2>{{ title }}</h2>
     <br>
-    <ng-container *ngIf="tasks; then allTasks; else emptyList"></ng-container>
-    <ng-template #allTasks>
-        <div class="container" id="taskContainer">
-            <div *ngFor="let task of tasks">
-                <app-task-item [task]="task"></app-task-item>
-            </div>
-        </div>
+
+    <ng-container *ngIf="defaultView; then default; else results"></ng-container>
+    <ng-template #default>
+            <ng-container *ngIf="tasks; then allTasks; else emptyList"></ng-container>
+            <ng-template #allTasks>
+                <div class="container" id="taskContainer">
+                    <div *ngFor="let task of tasks">
+                        <app-task-item [task]="task"></app-task-item>
+                    </div>
+                </div>
+                <app-edit-task></app-edit-task>
+                <app-view-task></app-view-task>
+            </ng-template>
+            <ng-template #emptyList><div id="taskContainer">NO TASKS!</div></ng-template>
     </ng-template>
-    <ng-template #emptyList><div id="taskContainer">NO TASKS!</div></ng-template>
+
+    <ng-template #results>
+            <ng-container *ngIf="opValues; then cmdResults; else emptyResults"></ng-container>
+            <ng-template #cmdResults>
+                <div *ngFor="let key of opKeys(opValues)">
+                    <h5>{{ key }}</h5>
+                    <div class="container" id="taskContainer">
+                        <div *ngFor="let task of opValues[key]">
+                            <app-task-item [task]="task"></app-task-item>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+            <ng-template #emptyResults><div id="taskContainer">NO RESULTS!</div></ng-template>
+    </ng-template>
+    
     <br>
 </div>

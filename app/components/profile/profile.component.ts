@@ -27,11 +27,10 @@ export class ProfileComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.authService.getProfile().subscribe(profile => {
-      this.user = profile.user;
-    }, err => { 
-      console.log(err); 
-      return false; }
+    this.authService.getProfile()
+    .subscribe(profile => {
+        this.user = profile.user;
+      }, err => { console.log(err); return false; }
     );
   }
 

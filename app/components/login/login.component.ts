@@ -30,7 +30,10 @@ export class LoginComponent implements OnInit {
     };
 
     if(!this.validateService.validateLogin(user)) {
-      this.flashMessage.show("Please fill in all fields!", {cssClass: 'alert-danger', timeout: 3000});
+      this.flashMessage.show("Please fill in all fields!", {
+        cssClass: 'alert-danger', 
+        timeout: 3000
+      });
       return false;
     }
 
@@ -42,7 +45,8 @@ export class LoginComponent implements OnInit {
       } else {
         this.flashMessage.show(data.msg, {
           cssClass: 'alert-danger',
-          timeout: 5000});
+          timeout: 5000
+        });
         
         this.router.navigate(['login']);
       }

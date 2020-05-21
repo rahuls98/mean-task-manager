@@ -87,3 +87,7 @@ h2 {
     border-radius: 10px;
     padding: 20px;
 }
+
+a:hover {
+    cursor: pointer;
+}

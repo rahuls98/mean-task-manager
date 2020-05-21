@@ -1,6 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, forwardRef, asNativeElements } from '@angular/core';
 import { Task } from '../../models/task';
 import { TaskService } from '../../services/task.service';
+import { GlobalVarsService } from '../../services/global-vars.service';
 
 @Component({
   selector: 'app-task-item',
@@ -11,13 +12,23 @@ export class TaskItemComponent implements OnInit {
   @Input() task: Task;
   isChecked: boolean;
 
+  labels = {
+    "personal": "l-ff304f",
+    "work": "l-002651", 
+    "shopping": "l-107a8b",
+    "others": "l-85203b"
+  }
+  
   constructor(
-    private taskService: TaskService
+    private taskService: TaskService,
+    private globalVarsService: GlobalVarsService
   ) { }
 
   ngOnInit(): void {
     if(this.task.isDone) this.isChecked = true;
     else this.isChecked = false;
+
+    this.setLabelClass();
   }
 
   setCompletedClass() {
@@ -35,10 +46,22 @@ export class TaskItemComponent implements OnInit {
       _id: this.task._id,
       isDone: this.task.isDone
     }
+/* 
+    let d = new Date(this.task.dueDate);
+    if(this.isChecked) {
+      let score = d.getDate() - new Date().getDate();
+      this.globalVarsService.forward.push(score);
+    } else {
+      let score = d.getDate() - new Date().getDate();
+      this.globalVarsService.backward.push(score);
+    }
+    console.log(this.globalVarsService.forward);
+    console.log(this.globalVarsService.backward);
+ */
 
     this.taskService.updateTaskStatus(updateObj)
-    .subscribe(status => {
-        if(status.success) { return true; }
+    .subscribe(updateResult => {
+        if(updateResult.success) { return true; }
       }, err => { console.log(err); return false; }
     );
   }
@@ -55,5 +78,32 @@ export class TaskItemComponent implements OnInit {
       classes = {'lowPriority': true};
 
     return classes;
+  }
+
+  setLabelClass() {
+    let label:string = this.task.label.toLowerCase();
+    let labelColor:string = this.labels[label];
+    let classes = {}
+    classes[labelColor] = true;
+    return classes;
+  }
+
+  viewTask() {
+    this.taskService.viewTransferFilter(this.task);
+  }
+
+  editTask() {
+    this.taskService.editTransferFilter(this.task);
+  }
+
+  deleteTask() {
+    this.taskService.deleteTask(this.task._id)
+    .subscribe(deleteResult => {
+        if(deleteResult.success) {
+          this.taskService.taskRefreshFilter("Task deleted!"); 
+          return true; 
+        }
+      }, err => { console.log(err); return false; }
+    );
   }
 }

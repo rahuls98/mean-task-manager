@@ -5,6 +5,8 @@ import { Injectable } from '@angular/core';
 })
 export class GlobalVarsService {
   mode:boolean; //toggle for the app theme
+  forward = [];
+  backward = [];
 
   constructor() { }
 

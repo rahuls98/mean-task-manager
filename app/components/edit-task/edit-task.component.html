@@ -1,1 +1,69 @@
-<p>edit-task works!</p>
+<div class="modal fade bd-example-modal-lg" id="edit-task" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <flash-messages></flash-messages>
+            <h5 class="modal-title">
+                EDIT TASK 
+                <span class="modal-close-btn" data-dismiss="modal"><i class="fa fa-times"></i></span>
+            </h5>
+            <br>
+            <div class="modal-body">
+                <form (submit)="updateTask()">
+                    <div class="row">
+                        <div class="col-2">
+                            <label for="updTitle" class="col-form-label">Title</label>
+                        </div>
+                        <div class="col-10">
+                            <input style="width: 100%" type="text" [(ngModel)]="updTitle" name="updTitle" id="updTitle" value="{{ task.title }}">
+                        </div>                           
+                    </div> 
+                    <br>
+                    <div class="row">
+                        <div class="col-2">
+                            <label for="updDate" class="col-form-label">Due date</label>
+                        </div>
+                        <div class="col-3">
+                            <input [(ngModel)]="updDate" name="updDate" type="date" id="updDate">
+                        </div>                           
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="input-group col-6">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="updPriority">Priority</label>
+                            </div>
+                            <select class="custom-select" [(ngModel)]="updPriority" name="updPriority" id="updPriority" value="{{ task.priority }}">
+                                <option value="High">High</option>
+                                <option value="Medium">Medium</option>
+                                <option value="Low">Low</option>
+                            </select>
+                        </div>
+
+                        <div class="input-group col-6">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="updLabel">Label</label>
+                            </div>
+                            <select class="custom-select" [(ngModel)]="updLabel" name="updLabel" id="updLabel" value="{{ task.label }}">
+                                <option value="Personal">Personal</option>
+                                <option value="Work">Work</option>
+                                <option value="Shopping">Shopping</option>
+                                <option value="Others">Others</option>
+                            </select>
+                        </div>
+                    </div>
+                    <br><hr><br>
+                    <div class="row" style="justify-content: space-evenly;">
+                        <div><button type="submit" class="btn btn-outline-danger">Update</button></div>
+                    </div>
+                </form>
+
+                <!-- {{ task.title }}<br>
+                {{ task.dueDate }}<br>
+                {{ task.priority }}<br>
+                {{ task.label }}<br>
+                {{ task.status }} -->
+            </div>
+        </div>
+    </div>
+</div>
+    

@@ -1,9 +1,10 @@
 <div class="modal fade bd-example-modal-lg" id="new-task" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
+            <flash-messages></flash-messages>
             <h5 class="modal-title">
                 Details 
-                <span class="modal-close-btn" data-dismiss="modal"><i class="fa fa-times"></i></span>
+                <span class="modal-close-btn" data-dismiss="modal" (click)="listRefresh()"><i class="fa fa-times"></i></span>
             </h5>
             <br>
             <div class="modal-body">
@@ -27,7 +28,7 @@
                     </div>
                     <br>
                     <div class="row">
-                        <div class="input-group col-4">
+                        <div class="input-group col-6">
                             <div class="input-group-prepend">
                                 <label class="input-group-text" for="priority">Priority</label>
                             </div>
@@ -39,7 +40,7 @@
                             </select>
                         </div>
 
-                        <div class="input-group col-4">
+                        <div class="input-group col-6">
                             <div class="input-group-prepend">
                                 <label class="input-group-text" for="label">Label</label>
                             </div>
@@ -52,23 +53,23 @@
                             </select>
                         </div>
 
-                        <div class="input-group col-4">
+                        <!-- <div class="input-group col-4">
                             <div class="input-group-prepend">
                                 <label class="input-group-text" for="status">Status</label>
                             </div>
                             <select class="custom-select" [(ngModel)]="status" name="status" id="status">
                                 <option selected>-</option>
-                                <option value="New">New</option>
-                                <option value="In Progress">In Progress</option>
+                                <option value="Pending">Pending</option>
+                                <option value="Overdue">Overdue</option>
                                 <option value="Completed">Completed</option>
                             </select>
-                        </div>
+                        </div> -->
                     </div>
                     <br><hr><br>
                     <div class="row" style="justify-content: center;">
-                        <div><button type="submit" class="btn btn-outline-danger">Add</button></div>
-                        <div class="center-btn"><button type="reset" class="btn btn-outline-danger">Reset</button></div>
-                        <div><button type="button" data-dismiss="modal" class="btn btn-outline-danger">Close</button></div>
+                        <div><button type="submit" class="btn btn-outline-primary">Add</button></div>
+                        <div class="center-btn"><button type="reset" class="btn btn-outline-primary">Reset</button></div>
+                        <div><button type="button" data-dismiss="modal" class="btn btn-outline-primary" (click)="listRefresh()">Close</button></div>
                     </div>
                 </form>
             </div>

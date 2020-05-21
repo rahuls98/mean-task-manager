@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TaskService } from '../../services/task.service';
 
 @Component({
   selector: 'app-search-bar',
@@ -11,10 +12,26 @@ export class SearchBarComponent implements OnInit {
   searchLabel:string;
   searchStatus:string;
 
-  constructor() { }
+  constructor(
+    private taskService: TaskService
+  ) { }
 
   ngOnInit(): void {
   }
 
-  onSubmit($event) {}
+  onSubmit() {
+    var obj = {
+      title: this.searchTitle,
+      priority: this.searchPriority,
+      label: this.searchLabel,
+      status: this.searchStatus,
+    }
+
+    this.searchTitle = undefined;
+    this.searchPriority = undefined;
+    this.searchLabel = undefined;
+    this.searchStatus = undefined;
+    
+    this.taskService.searchTransferFilter(obj);
+  }
 }

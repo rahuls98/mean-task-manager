@@ -44,7 +44,7 @@ const appRoutes: Routes = [
     AddTaskComponent,
     ViewTaskComponent,
     EditTaskComponent,
-    TaskItemComponent
+    TaskItemComponent,
   ],
   imports: [
     BrowserModule,
