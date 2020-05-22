@@ -19,6 +19,16 @@ const UserSchema = mongoose.Schema({
         type: String,
         require: true
     },
+    gamification: {
+        score: {
+            type: Number,
+            require: true
+        },
+        n : {
+            type: Number,
+            require: true
+        }
+    }
 });
 
 const User = module.exports = mongoose.model('User', UserSchema);

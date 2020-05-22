@@ -26,6 +26,16 @@ const TaskSchema = mongoose.Schema({
     isDone: {
         type: Boolean,
         require: true
+    },
+    gamification: {
+        firstCheck: {
+            type: Date,
+            require: true
+        },
+        score : {
+            type: Number,
+            require: true
+        }
     }
 });
 
@@ -49,16 +59,23 @@ module.exports.getAllTasks = function(callback) {
     Task.find({}, callback);
 };
 
-module.exports.updateTaskStatus = function(taskID, task_isDone, callback) {
+module.exports.updateTaskStatus = function(taskID, task_SAS, task_isDone, callback) {
     var obj = {}
     if(task_isDone) {
         obj["status"] = "Completed";
+        obj["gamification"] = {};
+        obj["gamification"]["firstCheck"] = new Date().toISOString();
+        obj["gamification"]["score"] = task_SAS;
         obj["isDone"] = task_isDone;
     }
     else {
         obj["status"] = "Pending";
+        obj["gamification"] = {};
+        obj["gamification"]["firstCheck"] = null;
+        obj["gamification"]["score"] = null;
         obj["isDone"] = task_isDone;
     }
+    console.log(obj);
     Task.updateOne({ _id: taskID }, obj , callback);
 }
 
