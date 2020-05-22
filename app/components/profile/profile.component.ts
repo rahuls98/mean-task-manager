@@ -4,10 +4,11 @@ import { GlobalVarsService } from '../../services/global-vars.service';
 import { Router } from '@angular/router';
 import { FlashMessagesService } from 'angular2-flash-messages';
 
-interface Options {
+interface Credentials {
   name?: string,
   username?: string
-  email?: string
+  email?: string,
+  gamification?: Object
 }
 
 @Component({
@@ -16,7 +17,7 @@ interface Options {
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  user:Options;
+  user:Credentials;
   //user:Options = {name: "Rahul Suresh",username: "rahs98",email: "rahs98@gmail.com"};
 
   constructor(
@@ -30,6 +31,7 @@ export class ProfileComponent implements OnInit {
     this.authService.getProfile()
     .subscribe(profile => {
         this.user = profile.user;
+        this.globalVarsService.user = profile.user;
       }, err => { console.log(err); return false; }
     );
   }

@@ -23,7 +23,8 @@ export class ViewTaskComponent implements OnInit {
       priority : undefined,
       label : undefined,
       status : undefined,
-      isDone: undefined
+      isDone: undefined,
+      gamification: undefined
     };
   }
 }

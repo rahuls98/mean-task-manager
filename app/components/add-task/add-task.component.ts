@@ -32,7 +32,11 @@ export class AddTaskComponent implements OnInit {
       priority: this.priority,
       label: this.label,
       status: "Pending",
-      isDone: false
+      isDone: false,
+      gamification : {
+        firstCheck: null,
+        score: null
+      }
     };
 
     if(!this.validateService.validateAddTask(newTask)) {

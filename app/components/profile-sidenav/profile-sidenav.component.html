@@ -7,16 +7,74 @@
     <br>
     <!-- PROFILE DETAILS -->
     <div class="row profile-block">
-        <div id="profileDetails"><h3>{{ name }}</h3><h5>{{ username }}</h5></div>
+        <div id="profileDetails">
+            <h3>{{ name }}</h3>
+            <h5><span class="badge badge-pill badge-primary">{{ username }}</span> @SquareAway</h5>
+        </div>
     </div>
-    <hr class="my-4">
+    <br><br>
+    <div class="row">
+        <div class="col-10">
+            <h5>Square-Away Wizard level: 
+                <span class="badge badge-light" id="level-badge">{{ width }}</span>
+            </h5>
+        </div><!-- 
+        <div class="col-2" style="text-align: right">
+            <h4><a><i class="fa fa-edit"></i></a></h4>
+        </div> -->
+    </div>
     
-    <!-- GAMIFICATION -->
-    <p>Gamification bar</p>
     <div class="progress">
-        <div class="progress-bar" role="progressbar" [style.width]="width" 
+        <div class="progress-bar progress-bar-striped" role="progressbar" [style.width]="width" 
              aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
         </div>
+    </div>
+    <br><br>
+    <!-- <hr class="my-4"> -->
+    
+    <!-- GAMIFICATION -->
+    <!-- <div class="card">
+        <div class="card-body">
+            <p>Help us help you feel motivated in squaring away your tasks. 
+                Click <a href="#">here</a> to know more about square away gamification.
+            </p>
+        </div>
+    </div> -->
+    <div class="card">
+        <div class="card-header">
+            Labels
+            <a data-toggle="collapse" href="#collapseExample" role="button">
+                <i class="fa fa-plus"></i>
+            </a>
+            <div class="collapse" id="collapseExample">
+                <div class="card card-body" style="padding: 10px 20px 5px 20px">
+                    <form>
+                        <input type="text" class="form-control" id="newLabel" placeholder="labelName">
+                        <br>
+                        <div class="row">
+                            <div class="col-6 input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="labelColor">Color</span>
+                                </div>
+                                <input type="color" class="form-control" id="labelColor">
+                            </div>
+                            <div class="col-6">
+                                <button type="button" class="btn btn-outline-primary">Add label</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="container" class="label-container">
+            <br>
+            <span class="badge label-badge" id="level-badge" 
+                *ngFor="let label of labels" [ngClass]="setLabelColor(label)"
+                >
+                {{ label }} {{ label }}
+            </span>
+        </div>
+        <br>
     </div>
     
     <!-- LOGOUT -->

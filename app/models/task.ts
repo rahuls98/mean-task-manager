@@ -6,4 +6,8 @@ export class Task {
     label: String;
     status: String;
     isDone: boolean;
+    gamification: {
+        firstCheck: Date,
+        score: number
+    };
 }

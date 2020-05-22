@@ -42,22 +42,30 @@ export class TaskItemComponent implements OnInit {
 
   toggleStatus() {
     this.task.isDone = !this.task.isDone;
+
+    let today = new Date().getTime();
+    let due = new Date(this.task.dueDate).getTime();
+    let diff = 24 * 3600 * 1000;
+    let score = Math.trunc((due - today)/diff) + 1;
+    console.log("Score: " + score);
+    if(score>2) score=2;
+    if(score<-2) score=-2;
+
     let updateObj = {
       _id: this.task._id,
-      isDone: this.task.isDone
+      isDone: this.task.isDone,
     }
-/* 
-    let d = new Date(this.task.dueDate);
-    if(this.isChecked) {
-      let score = d.getDate() - new Date().getDate();
-      this.globalVarsService.forward.push(score);
-    } else {
-      let score = d.getDate() - new Date().getDate();
-      this.globalVarsService.backward.push(score);
+
+    if(this.task.isDone) {
+      updateObj["SAS"]=score;
+      this.globalVarsService.updateSAS('add', score);
     }
-    console.log(this.globalVarsService.forward);
-    console.log(this.globalVarsService.backward);
- */
+    else {
+      this.taskService.getTask(this.task._id).subscribe((tasks) => {
+        let prevScore = tasks.tasks["0"].gamification.score;
+        this.globalVarsService.updateSAS('sub', prevScore);
+      });
+    }
 
     this.taskService.updateTaskStatus(updateObj)
     .subscribe(updateResult => {

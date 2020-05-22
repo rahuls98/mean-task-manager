@@ -8,6 +8,7 @@
     <br><br>
     <ng-container *ngIf="options; then showOptions; else noOptions"></ng-container>
     <ng-template #showOptions>
+        <div class="container">
         <div class="row" id="optionGroup">
             <button class="btn btn-outline-primary" data-toggle="modal" data-target="#new-task" type="button">Add task</button>
             <button class="btn btn-outline-primary" data-toggle="collapse" data-target="#searchBar" type="button">Search</button>
@@ -26,9 +27,11 @@
                 </div>
             </div>
         </div>
+        </div>
     </ng-template>
 
     <ng-template #noOptions>
+        <div class="container">
         <div class="row" id="optionGroup">
             <!-- <div class="dropdown">
                 <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter by</button>
@@ -40,16 +43,18 @@
             </div> -->
             <button class="btn btn-outline-primary" type="button" (click)="backToDefault()">Back</button>
         </div>
+    </div>
     </ng-template>
 
     <app-add-task></app-add-task>
     <div class="row">
         <app-search-bar class="collapse col" id="searchBar"></app-search-bar>
     </div>
-    <hr class="my-4">
+
+    <!-- <div class="container"><hr class="my-4"></div> -->
+    <br>
     
     <h2>{{ title }}</h2>
-    <br>
 
     <ng-container *ngIf="defaultView; then default; else results"></ng-container>
     <ng-template #default>

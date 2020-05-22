@@ -32,7 +32,8 @@ export class EditTaskComponent implements OnInit {
       priority : undefined,
       label : undefined,
       status : undefined,
-      isDone: undefined
+      isDone: undefined,
+      gamification: undefined
     };
   }
 

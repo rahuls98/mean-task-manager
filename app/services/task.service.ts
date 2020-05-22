@@ -10,17 +10,23 @@ import { filter } from 'rxjs/operators';
 })
 export class TaskService {
   private getAllTasksURL:string = "http://localhost:8080/tasks/readAll";
+  private getTaskURL:string = "http://localhost:8080/tasks/read/";
   private addTaskURL:string = "http://localhost:8080/tasks/create";
   private updateTaskStatusURL:string = "http://localhost:8080/tasks/updateStatus";
   private filterTasksURL:string = "http://localhost:8080/tasks/filter/";
   private sortTasksURL:string = "http://localhost:8080/tasks/sort/";
   private deleteTaskURL:string = "http://localhost:8080/tasks/delete/";
   private searchTasksURL:string = "http://localhost:8080/tasks/search/";
-  private updateTaskURL:string = "http://localhost:8080/tasks/update"
+  private updateTaskURL:string = "http://localhost:8080/tasks/update";
+  private getLabelsURL:string = "http://localhost:8080/tasks/labels"
 
   constructor(
     private http: Http,
   ) { }
+
+  getTask(taskID:String):Observable<any> {
+    return this.http.get(this.getTaskURL + taskID).map(res => res.json());  
+  }  
 
   getAllTasks():Observable<any> {
     return this.http.get(this.getAllTasksURL).map(res => res.json());  
@@ -36,6 +42,10 @@ export class TaskService {
   private _taskRefresh = new Subject<any>();
   taskRefreshListen(): Observable<any> { return this._taskRefresh.asObservable(); }
   taskRefreshFilter(filterBy: string) { this._taskRefresh.next(filterBy) };
+
+  private _progressRefresh = new Subject<any>();
+  progressRefreshListen(): Observable<any> { return this._progressRefresh.asObservable(); }
+  progressRefreshFilter(filterBy: number) { this._progressRefresh.next(filterBy) };
 
   private _searchTransfer = new Subject<any>();
   searchTransferListen(): Observable<any> { return this._searchTransfer.asObservable(); }
@@ -79,4 +89,8 @@ export class TaskService {
     //console.log(searchQuery)
     return this.http.get(this.searchTasksURL + searchQuery).map(res => res.json());
   }
+
+  getLabels():Observable<any> {
+    return this.http.get(this.getLabelsURL).map(res => res.json());  
+  }  
 }

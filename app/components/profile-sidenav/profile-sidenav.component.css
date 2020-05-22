@@ -18,6 +18,64 @@
     border-radius: 50%;
 }
 
+#level-badge {
+    font-size: 18px;
+}
+
+.fa-edit:hover {
+    cursor: pointer;
+    color: blue;
+}
+
+.card-body p {
+    margin-bottom: 0 !important;
+}
+
+div.label-container {
+    overflow:auto;
+    white-space: nowrap;
+}
+div.label-container::-webkit-scrollbar {
+    display: none;
+}
+div.label-container {
+-ms-overflow-style: none;
+}
+
+.label-badge {
+    background: black;
+    color: white;
+    font: 16px;
+    font-weight: normal;
+    padding: 2px 8px 2px 8px;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+.l-ff304f {
+    background: #ff304f;
+    color: white;
+}
+.l-002651 {
+    background: #002651;
+    color: white;
+}
+.l-107a8b {
+    background: #107a8b;
+    color: white;
+}
+.l-85203b {
+    background: #85203b;
+    color: white;
+}
+
+.fa-plus {
+    float: right;
+}
+.fa-plus:hover {
+    color: blue;
+    cursor: pointer;
+}
+
 .logoutButton {
     position: absolute;
     bottom: 30px;
