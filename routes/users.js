@@ -11,7 +11,8 @@ router.post('/register', (req, res, next) => {
         name: req.body.name,
         email: req.body.email,
         username: req.body.username,
-        password: req.body.password
+        password: req.body.password,
+        gamification: req.body.gamification
     });
 
     User.addUser(newUser, (err, user) => {
@@ -47,7 +48,8 @@ router.post('/authenticate', (req, res, next) => {
                         id: user._id,
                         name: user.name,
                         username: user.username,
-                        email: user.email
+                        email: user.email,
+                        gamification: user.gamification
                     }
                 });
             } else {
@@ -61,5 +63,19 @@ router.get('/profile', passport.authenticate('jwt', {session:false}), (req, res,
     console.log("Logged in: " + req.user.username);
     res.json({user: req.user});
 });
+
+router.put('/updateSAS', (req, res, next) => {
+    let username = req.body.username;
+    let gObj = req.body.gamification;
+    console.log(req.body);
+    User.updateSAS(username, gObj, (err, updateResult) => {
+        if(err)
+            res.json({success: false, msg: "Failed to update SAS!"});
+        else {
+            console.log("Updated SAS for: " + username);
+            res.json({success: true, update: updateResult});
+        }
+    })
+})
 
 module.exports = router;

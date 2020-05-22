@@ -11,7 +11,8 @@ router.post('/create', (req, res, next) => {
         priority: req.body.priority,
         label: req.body.label,
         status: req.body.status,
-        isDone: req.body.isDone
+        isDone: req.body.isDone,
+        gamification: req.body.gamification
     });
 
     Task.addTask(newTask, (err, task) => {
@@ -50,7 +51,8 @@ router.get('/readAll', (req, res, next) => {
 router.put('/updateStatus', (req, res, next) => {
     let taskID = req.body._id;
     let task_isDone = req.body.isDone;
-    Task.updateTaskStatus(taskID, task_isDone, (err, updateResult) => {
+    let task_SAS = req.body.SAS;
+    Task.updateTaskStatus(taskID, task_SAS, task_isDone, (err, updateResult) => {
         if(err)
             res.json({success: false, msg: "Failed to update task!"});
         else {
@@ -114,4 +116,15 @@ router.get('/search', (req, res, next) => {
             res.json({success: true, tasks: tasks});
         }
     })
+});
+
+router.get('/labels', (req, res, next) => {
+    Task.distinct('label', (err, labels) => {
+        if(err)
+            res.json({success: false, msg: "Failed to retrieve labels!"});
+        else {
+            console.log("Retrieved tasks: " + labels.length);
+            res.json({success: true, labels: labels});
+        }
+    });
 });
