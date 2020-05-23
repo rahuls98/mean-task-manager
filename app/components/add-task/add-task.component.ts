@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Task } from "../../models/task";
 import { ValidateService } from "../../services/validate.service";
 import { TaskService } from "../../services/task.service";
+import { GlobalVarsService } from "../../services/global-vars.service";
 import { FlashMessagesService } from 'angular2-flash-messages';
 
 @Component({
@@ -18,11 +19,21 @@ export class AddTaskComponent implements OnInit {
 
   constructor(
     private taskService: TaskService,
+    private globalVarsService: GlobalVarsService,
     private validateService: ValidateService,
     private flashMessage: FlashMessagesService
   ) { }
 
   ngOnInit(): void {
+  }
+
+  toggleTheme() {
+    if(this.globalVarsService.mode) {
+      let classes = {
+        'darkTheme': true
+      }
+      return classes;
+    }
   }
 
   addTask(event) {

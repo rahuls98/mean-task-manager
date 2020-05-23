@@ -1,4 +1,10 @@
-<div class="container sidenav-contents">
+<div class="container sidenav-contents" [ngClass]="toggleTheme()">
+    <br>
+    <div class="row">
+        <button (click)="onLogoutClick()">
+            Logout
+        </button>
+    </div>
     <br>
     <!-- PROFILE PICTURE -->
     <div class="row profile-block">
@@ -9,15 +15,16 @@
     <div class="row profile-block">
         <div id="profileDetails">
             <h3>{{ name }}</h3>
-            <h5><span class="badge badge-pill badge-primary">{{ username }}</span> @SquareAway</h5>
+            <h5><span class="badge badge-pill account-badge">{{ username }}</span> @SquareAway</h5>
         </div>
     </div>
-    <br><br>
+    <hr class="my-4">
+    <br>
     <div class="row">
-        <div class="col-10">
-            <h5>Square-Away Wizard level: 
+        <div class="col-12">
+            <p style="text-align: center">Square-Away Wizard level: 
                 <span class="badge badge-light" id="level-badge">{{ width }}</span>
-            </h5>
+            </p>
         </div><!-- 
         <div class="col-2" style="text-align: right">
             <h4><a><i class="fa fa-edit"></i></a></h4>
@@ -30,17 +37,8 @@
         </div>
     </div>
     <br><br>
-    <!-- <hr class="my-4"> -->
-    
-    <!-- GAMIFICATION -->
+
     <!-- <div class="card">
-        <div class="card-body">
-            <p>Help us help you feel motivated in squaring away your tasks. 
-                Click <a href="#">here</a> to know more about square away gamification.
-            </p>
-        </div>
-    </div> -->
-    <div class="card">
         <div class="card-header">
             Labels
             <a data-toggle="collapse" href="#collapseExample" role="button">
@@ -75,12 +73,12 @@
             </span>
         </div>
         <br>
-    </div>
+    </div> -->
     
     <!-- LOGOUT -->
-    <div class="row logoutButton">
+    <!-- <div class="row logoutButton">
         <button class="btn btn-outline-danger" type="submit" 
-            (click)="onLogoutClick()" href="#"> Logout
+            (click)="onLogoutClick()" href="#"> LOGOUT
         </button>
-    </div>
+    </div> -->
 </div>

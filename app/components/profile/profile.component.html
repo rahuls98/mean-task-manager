@@ -5,7 +5,7 @@
     <body [ngClass]="toggleTheme()">
         <div class="container-fluid">
             <div class="row">
-                <app-profile-sidenav [name]="user.name" [username]="user.username" class="col-4"></app-profile-sidenav>
+                <app-profile-sidenav [name]="user.name" [username]="user.username" [progress]="progress" class="col-4"></app-profile-sidenav>
                 <app-profile-body class="col-8"></app-profile-body>
             </div>
         </div>

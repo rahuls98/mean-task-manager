@@ -1,6 +1,7 @@
-<div class="card card-body">
+<div class="card card-body" [ngClass]="toggleTheme()">
     <form (submit)="onSubmit()">
-        <h3>Search using:</h3>
+        <h4>Search using:</h4>
+        <br>
         <div class="form-row">
             <div class="col-12">
                 <input class="form-control" [(ngModel)]="searchTitle" name="searchTitle" type="text" placeholder="Title / Keywords">
@@ -43,7 +44,7 @@
         <br>
         <div class="form-row">
             <div class="col-12">
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" class="btn">
                     <i class="fa fa-search"></i>
                 </button>
             </div>

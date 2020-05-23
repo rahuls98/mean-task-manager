@@ -18,7 +18,7 @@ export class TaskService {
   private deleteTaskURL:string = "http://localhost:8080/tasks/delete/";
   private searchTasksURL:string = "http://localhost:8080/tasks/search/";
   private updateTaskURL:string = "http://localhost:8080/tasks/update";
-  private getLabelsURL:string = "http://localhost:8080/tasks/labels"
+  /* private getLabelsURL:string = "http://localhost:8080/tasks/labels" */
 
   constructor(
     private http: Http,
@@ -90,7 +90,7 @@ export class TaskService {
     return this.http.get(this.searchTasksURL + searchQuery).map(res => res.json());
   }
 
-  getLabels():Observable<any> {
+  /* getLabels():Observable<any> {
     return this.http.get(this.getLabelsURL).map(res => res.json());  
-  }  
+  }   */
 }

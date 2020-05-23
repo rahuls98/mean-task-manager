@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Task } from '../../models/task';
 import { TaskService } from '../../services/task.service';
+import { GlobalVarsService } from "../../services/global-vars.service";
 import { FlashMessagesService } from 'angular2-flash-messages';
 
 @Component({
@@ -18,6 +19,7 @@ export class EditTaskComponent implements OnInit {
 
   constructor(
     private taskService: TaskService,
+    private globalVarsService: GlobalVarsService,
     private flashMessage: FlashMessagesService) 
   {
     this.taskService.editTransferListen().subscribe((task:Task) => {
@@ -35,6 +37,15 @@ export class EditTaskComponent implements OnInit {
       isDone: undefined,
       gamification: undefined
     };
+  }
+
+  toggleTheme() {
+    if(this.globalVarsService.mode) {
+      let classes = {
+        'darkTheme': true
+      }
+      return classes;
+    }
   }
 
   updateTask(){

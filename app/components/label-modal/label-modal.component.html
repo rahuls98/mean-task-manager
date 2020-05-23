@@ -1,0 +1,46 @@
+<div class="modal fade bd-example-modal-lg" id="label-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document" [ngClass]="toggleTheme()">
+        <div class="modal-content">
+            <flash-messages></flash-messages>
+            <h5 class="modal-title">
+                Labels 
+                <span class="modal-close-btn" data-dismiss="modal"><i class="fa fa-times"></i></span>
+            </h5>
+            <br>
+            <div class="modal-body">
+            <div class="card">
+                <div class="card-header">
+                    Labels
+                    <a data-toggle="collapse" href="#collapseExample" role="button" style="float:right;">
+                        <button class="btn"><i class="fa fa-plus"></i></button>
+                    </a>
+                </div>
+                    <div class="collapse" id="collapseExample">
+                        <div class="card card-body" style="padding: 20px 20px 10px 20px">
+                            <form (submit)="labelSubmit($event)">
+                                <input type="text" class="form-control" [(ngModel)]="newLabel" name="newLabel" id="newLabel" placeholder="labelName">
+                                <br>
+                                <div class="row">
+                                    <div class="col-6 input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="labelColor">Color</span>
+                                        </div>
+                                        <input type="color" class="form-control" [(ngModel)]="labelColor" name="labelColor" id="labelColor">
+                                    </div>
+                                    <div class="col-6">
+                                        <button class="btn" type="submit">Add label</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                <ul class="list-group list-group-flush" *ngFor="let label of labels" [ngClass]="setLabelColor(label)">
+                    <li class="list-group-item"> 
+                        {{ label }} 
+                        <i class="fa fa-tag" style="float:right"></i>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

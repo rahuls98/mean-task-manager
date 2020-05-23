@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Task } from '../../models/task';
 import { TaskService } from '../../services/task.service';
+import { GlobalVarsService } from "../../services/global-vars.service";
+
+
 
 @Component({
   selector: 'app-view-task',
@@ -10,7 +13,10 @@ import { TaskService } from '../../services/task.service';
 export class ViewTaskComponent implements OnInit {
   task:Task;
 
-  constructor(private taskService: TaskService) { 
+  constructor(
+    private taskService: TaskService,
+    private globalVarsService: GlobalVarsService
+  ) { 
     this.taskService.viewTransferListen().subscribe((task: Task) => {
       this.task = task;
     });
@@ -26,5 +32,14 @@ export class ViewTaskComponent implements OnInit {
       isDone: undefined,
       gamification: undefined
     };
+  }
+
+  toggleTheme() {
+    if(this.globalVarsService.mode) {
+      let classes = {
+        'darkTheme': true
+      }
+      return classes;
+    }
   }
 }

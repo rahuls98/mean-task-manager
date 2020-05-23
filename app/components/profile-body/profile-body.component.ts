@@ -45,6 +45,15 @@ export class ProfileBodyComponent implements OnInit {
     this.getTasks("allTasks", null);
   }
 
+  toggleTheme() {
+    if(this.globalVarsService.mode) {
+      let classes = {
+        'darkTheme': true
+      }
+      return classes;
+    }
+  }
+
   getTasks(resultsOf:string, field:string) {
     
     if(resultsOf=="allTasks") {

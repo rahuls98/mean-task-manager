@@ -74,8 +74,39 @@ input:checked + .slider:before {
     justify-content: space-evenly;
 }
 
-button {
+button.btn {
     width: 120px;
+    color: #e42c64 /* 2c003e #424874 */;
+    border: #e42c64 /* 2c003e #424874 */ solid 1px;
+    outline: none;
+    transition: 0.5s;
+}
+button.btn:hover {
+    background: #e42c64 /* 424874 */;
+    color: white;
+}
+button.btn:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+button.btn:active {
+    outline: none !important;
+    box-shadow: none !important;
+    background: #e42c64 /* 424874 */ ;
+    color: white;
+}
+
+.darkTheme button.btn {
+    color: #29a19c /* #424874 */;
+    border: #29a19c /* #424874 */ solid 1px;
+    transition: 0.5s;
+}
+.darkTheme button.btn:hover {
+    background: #29a19c;
+    color: white;
+}
+.darkTheme button.btn:active {
+    background: #29a19c ;
 }
 
 h2 {

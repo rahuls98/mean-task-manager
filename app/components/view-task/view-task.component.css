@@ -1,3 +1,13 @@
+.modal-dialog {
+    transition: 0.5s;
+    color: #2c003e;
+}
+.darkTheme .modal-content {
+    background: #252525;
+    color: white;
+    transition: 0.5s;
+}
+
 .modal-content {
     padding: 50px !important;
     font-size: 20px;
@@ -5,4 +15,45 @@
 
 .modal-close-btn {
     float: right;
+}
+
+input {
+    border: rgb(128, 128, 128, 0.2) solid 1px;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+button {
+    width: 120px;
+    color: #e42c64 /* 2c003e #424874 */;
+    border: #e42c64 /* 2c003e #424874 */ solid 1px;
+    outline: none;
+    transition: 0.5s;
+}
+button:hover {
+    background: #e42c64 /* 424874 */;
+    color: white;
+}
+button:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+button:active {
+    outline: none !important;
+    box-shadow: none !important;
+    background: #e42c64 /* 424874 */ ;
+    color: white;
+}
+
+.darkTheme button {
+    color: #29a19c /* #424874 */;
+    border: #29a19c /* #424874 */ solid 1px;
+    transition: 0.5s;
+}
+.darkTheme button:hover {
+    background: #29a19c;
+    color: white;
+}
+.darkTheme button:active {
+    background: #29a19c ;
 }

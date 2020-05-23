@@ -17,14 +17,20 @@
     float: right;
 }
 
-input {
-    border: rgb(128, 128, 128, 0.2) solid 1px;
-    border-radius: 5px;
-    padding: 10px;
+.card {
+    background: white;
+    transition: 0.5s;
+    color: #2c003e;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.19), 0 3px 3px rgba(0,0,0,0.23);
+}
+.darkTheme .card {
+    background: #252525;
+    color: white;
+    box-shadow: 0 5px 8px rgb(10, 10, 10), 0 3px 3px rgb(10, 10, 10);
+    transition: 0.5s;
 }
 
 button {
-    width: 120px;
     color: #e42c64 /* 2c003e #424874 */;
     border: #e42c64 /* 2c003e #424874 */ solid 1px;
     outline: none;
@@ -56,4 +62,18 @@ button:active {
 }
 .darkTheme button:active {
     background: #29a19c ;
+}
+
+
+.l-ff304f {
+    color: #ff304f;
+}
+.l-002651 {
+    color: #002651;
+}
+.l-107a8b {
+    color: #107a8b;
+}
+.l-85203b {
+    color: #85203b;
 }

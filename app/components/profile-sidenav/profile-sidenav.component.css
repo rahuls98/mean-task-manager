@@ -4,6 +4,30 @@
     justify-content: center;
 }
 
+button {
+    width: fit-content;
+    font-size: 18px;
+    border: #e42c64 solid 1px;
+    color: #e42c64;
+    border-radius: 5px;
+    background: transparent;
+    transition: 0.5s;
+}
+button:hover {
+    background: #e42c64;
+    color: white;
+}
+
+.darkTheme button {
+    border: #29a19c solid 1px;
+    color: #29a19c;
+    transition: 0.5s;
+}
+.darkTheme button:hover {
+    background: #29a19c;
+    color: white;
+}
+
 .profile-block {
     text-align: center;
     justify-content: center;
@@ -18,8 +42,45 @@
     border-radius: 50%;
 }
 
+.account-badge {
+    background: #e42c64;
+    color: white;
+    font-weight: normal;
+    font-style: italic;
+    transition: 0.5s;
+}
+.darkTheme .account-badge {
+    background: #29a19c;
+    transition: 0.5s;
+}
+
 #level-badge {
-    font-size: 18px;
+    font-size: 16px;
+    font-weight: normal;
+    box-shadow: 0 2px 3px rgba(0,0,0,0.19), 0 1px 3px rgba(0,0,0,0.23);
+    transition: 0.5s;
+}
+.darkTheme #level-badge {
+    box-shadow: 0 2px 3px rgb(10, 10, 10), 0 1px 3px rgb(10, 10, 10);
+    transition: 0.5s;
+}
+
+.progress {
+    background: white;
+    box-shadow: 0 2px 3px rgba(0,0,0,0.19), 0 1px 3px rgba(0,0,0,0.23);
+    transition: 0.5s;
+}
+.darkTheme .progress {
+    box-shadow: 0 2px 3px rgb(10, 10, 10), 0 1px 3px rgb(10, 10, 10);
+    transition: 0.5s;
+}
+.progress-bar-striped {
+    background: #2c003e;
+    transition: 0.5s;
+}
+.darkTheme .progress-bar-striped {
+    background: #29a19c;
+    transition: 0.5s;
 }
 
 .fa-edit:hover {
@@ -50,22 +111,6 @@ div.label-container {
     padding: 2px 8px 2px 8px;
     margin-right: 5px;
     margin-left: 5px;
-}
-.l-ff304f {
-    background: #ff304f;
-    color: white;
-}
-.l-002651 {
-    background: #002651;
-    color: white;
-}
-.l-107a8b {
-    background: #107a8b;
-    color: white;
-}
-.l-85203b {
-    background: #85203b;
-    color: white;
 }
 
 .fa-plus {

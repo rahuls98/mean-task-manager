@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TaskService } from '../../services/task.service';
+import { GlobalVarsService } from '../../services/global-vars.service';
 
 @Component({
   selector: 'app-search-bar',
@@ -13,10 +14,20 @@ export class SearchBarComponent implements OnInit {
   searchStatus:string;
 
   constructor(
-    private taskService: TaskService
+    private taskService: TaskService,
+    private globalVarsService: GlobalVarsService,
   ) { }
 
   ngOnInit(): void {
+  }
+
+  toggleTheme() {
+    if(this.globalVarsService.mode) {
+      let classes = {
+        'darkTheme': true
+      }
+      return classes;
+    }
   }
 
   onSubmit() {

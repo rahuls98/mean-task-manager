@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" [ngClass]="toggleTheme()">
     <br>
     <div class="row" id="toggleContainer">
         <label class="switch">
@@ -10,10 +10,10 @@
     <ng-template #showOptions>
         <div class="container">
         <div class="row" id="optionGroup">
-            <button class="btn btn-outline-primary" data-toggle="modal" data-target="#new-task" type="button">Add task</button>
-            <button class="btn btn-outline-primary" data-toggle="collapse" data-target="#searchBar" type="button">Search</button>
+            <button class="btn" data-toggle="modal" data-target="#new-task" type="button">Add task</button>
+            <button class="btn" data-toggle="collapse" data-target="#searchBar" type="button">Search</button>
             <div class="dropdown">
-                <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter by</button>
+                <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter by</button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <a class="dropdown-item" (click)="getResults('Filter','Priority')">Priority</a>
                     <a class="dropdown-item" (click)="getResults('Filter','Label')">Label</a>
@@ -21,11 +21,13 @@
                 </div>
             </div>
             <div class="dropdown">
-                <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sort by</button>
+                <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sort by</button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <a class="dropdown-item" (click)="getResults('Sort','dueDate')">Due date</a>
                 </div>
             </div>
+            <button class="btn" data-toggle="modal" data-target="#label-modal" type="button">Labels</button>
+    
         </div>
         </div>
     </ng-template>
@@ -33,14 +35,6 @@
     <ng-template #noOptions>
         <div class="container">
         <div class="row" id="optionGroup">
-            <!-- <div class="dropdown">
-                <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter by</button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" (click)="getResults('Filter','Priority')">Priority</a>
-                    <a class="dropdown-item" (click)="getResults('Filter','Label')">Label</a>
-                    <a class="dropdown-item" (click)="getResults('Filter','Status')">Status</a>
-                </div>
-            </div> -->
             <button class="btn btn-outline-primary" type="button" (click)="backToDefault()">Back</button>
         </div>
     </div>
@@ -50,8 +44,8 @@
     <div class="row">
         <app-search-bar class="collapse col" id="searchBar"></app-search-bar>
     </div>
+    <app-label-modal></app-label-modal>
 
-    <!-- <div class="container"><hr class="my-4"></div> -->
     <br>
     
     <h2>{{ title }}</h2>
@@ -75,12 +69,17 @@
             <ng-container *ngIf="opValues; then cmdResults; else emptyResults"></ng-container>
             <ng-template #cmdResults>
                 <div *ngFor="let key of opKeys(opValues)">
-                    <h5>{{ key }}</h5>
+                    <div class="container">
+                        <h4 style="padding-left: 15px;">{{ key }}</h4>
+                    </div>
+                    <br>
                     <div class="container" id="taskContainer">
                         <div *ngFor="let task of opValues[key]">
                             <app-task-item [task]="task"></app-task-item>
                         </div>
                     </div>
+                    <br>
+                    <hr class="my-4">
                 </div>
             </ng-template>
             <ng-template #emptyResults><div id="taskContainer">NO RESULTS!</div></ng-template>

@@ -11,6 +11,7 @@ import { GlobalVarsService } from '../../services/global-vars.service';
 export class TaskItemComponent implements OnInit {
   @Input() task: Task;
   isChecked: boolean;
+  isLate: boolean;
 
   labels = {
     "personal": "l-ff304f",
@@ -26,9 +27,21 @@ export class TaskItemComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.task.isDone) this.isChecked = true;
-    else this.isChecked = false;
+    else {
+      this.isChecked = false;
+      if((new Date()) > (new Date(this.task.dueDate))) this.isLate = true;
+    }
 
     this.setLabelClass();
+  }
+
+  toggleTheme() {
+    if(this.globalVarsService.mode) {
+      let classes = {
+        'darkTheme': true
+      }
+      return classes;
+    }
   }
 
   setCompletedClass() {

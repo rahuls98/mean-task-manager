@@ -1,18 +1,22 @@
-<div class="container task-item">
+<div class="container task-item" [ngClass]="toggleTheme()">
     <li class="list-group-item">
         <div class="row">
             <div class="col-1">
                 <input class="form-check-input" type="checkbox" id="check" 
                        (change)="toggleStatus()" [(ngModel)]="isChecked"/>
             </div>
-            <div class="col-9">
+            <div class="col-7">
                 <h5 id="title" [ngClass]="setCompletedClass()">{{ task.title }}</h5>
+                
                 <div id="dueDate">
                     <div class="priority" [ngClass]="setPriorityClass()">
                         <i>{{ "Due " + task.dueDate.toString().substring(8,10) 
                             + "/" + task.dueDate.toString().substring(5,7) }}</i>
                     </div>
                 </div>
+            </div>
+            <div class="col-2 my-auto">
+                <span class="badge badge-pill badge-warning" *ngIf="isLate">Late!</span>
             </div>
             <div class="col-1 my-auto">
                 <div class="label" [ngClass]="setLabelClass()">
