@@ -20,6 +20,10 @@ const UserSchema = mongoose.Schema({
         require: true
     },
     gamification: {
+        activeOn: {
+            type: Array,
+            require: true
+        },
         score: {
             type: Number,
             require: true
@@ -28,6 +32,14 @@ const UserSchema = mongoose.Schema({
             type: Number,
             require: true
         }
+    },
+    labels: {
+        type: Array,
+        require: true
+    },
+    sag: {
+        type: Boolean,
+        require: true
     }
 });
 
@@ -58,4 +70,29 @@ module.exports.comparePassword = function(candidatePassword, hash, callback) {
         if(err) throw err;
         callback(null, isMatch);
     })
+}
+
+module.exports.updateSAS = function(username, gObj ,callback) {
+    console.log("Inside user.js: " + username);
+    console.log(gObj);
+    User.updateOne({ username: username}, {gamification: gObj}, callback);
+}
+
+module.exports.updateActiveOn = function(username, activeOn ,callback) {
+    console.log("Inside user.js: " + username);
+    console.log(activeOn);
+    User.update({ username: username}, {$set: {"gamification.activeOn": activeOn, sag: true}}, callback);
+}
+
+module.exports.getLabels = function(username, callback) {
+    User.find({username: username},  {labels: 1}, callback);
+}
+
+module.exports.addLabel = function(username, labelInfo, callback) {
+    console.log(labelInfo);
+    User.updateOne({ username: username}, {$addToSet: {labels: labelInfo}}, callback);
+}
+
+module.exports.delLabel = function(username, labels, callback) {
+    User.updateOne({ username: username}, {$set: {labels: labels}}, callback);
 }
