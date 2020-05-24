@@ -23,6 +23,7 @@ import { ViewTaskComponent } from './components/view-task/view-task.component';
 import { EditTaskComponent } from './components/edit-task/edit-task.component';
 import { TaskItemComponent } from './components/task-item/task-item.component';
 import { LabelModalComponent } from './components/label-modal/label-modal.component';
+import { SagModalComponent } from './components/sag-modal/sag-modal.component';
 
 const appRoutes: Routes = [
   {path:'', component: HomeComponent},
@@ -47,6 +48,7 @@ const appRoutes: Routes = [
     EditTaskComponent,
     TaskItemComponent,
     LabelModalComponent,
+    SagModalComponent,
   ],
   imports: [
     BrowserModule,

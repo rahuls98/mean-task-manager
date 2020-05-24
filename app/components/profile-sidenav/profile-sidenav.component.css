@@ -4,28 +4,39 @@
     justify-content: center;
 }
 
-button {
-    width: fit-content;
-    font-size: 18px;
-    border: #e42c64 solid 1px;
-    color: #e42c64;
-    border-radius: 5px;
-    background: transparent;
+button.btn {
+    width: 120px;
+    color: #e42c64 /* 2c003e #424874 */;
+    border: #e42c64 /* 2c003e #424874 */ solid 1px;
+    outline: none;
     transition: 0.5s;
 }
-button:hover {
-    background: #e42c64;
+button.btn:hover {
+    background: #e42c64 /* 424874 */;
+    color: white;
+}
+button.btn:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+button.btn:active {
+    outline: none !important;
+    box-shadow: none !important;
+    background: #e42c64 /* 424874 */ ;
     color: white;
 }
 
-.darkTheme button {
-    border: #29a19c solid 1px;
-    color: #29a19c;
+.darkTheme button.btn {
+    color: #29a19c /* #424874 */;
+    border: #29a19c /* #424874 */ solid 1px;
     transition: 0.5s;
 }
-.darkTheme button:hover {
+.darkTheme button.btn:hover {
     background: #29a19c;
     color: white;
+}
+.darkTheme button.btn:active {
+    background: #29a19c ;
 }
 
 .profile-block {
@@ -51,6 +62,19 @@ button:hover {
 }
 .darkTheme .account-badge {
     background: #29a19c;
+    transition: 0.5s;
+}
+
+.card {
+    background: white;
+    transition: 0.5s;
+    color: #2c003e;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.19), 0 3px 3px rgba(0,0,0,0.23);
+}
+.darkTheme .card {
+    background: #252525;
+    color: white;
+    box-shadow: 0 5px 8px rgb(10, 10, 10), 0 3px 3px rgb(10, 10, 10);
     transition: 0.5s;
 }
 

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { TaskService } from '../services/task.service';
+import { UserService } from '../services/user.service';
 import { Http, Headers } from '@angular/http';
 
 interface Credentials {
@@ -7,9 +8,12 @@ interface Credentials {
   username?: string
   email?: string,
   gamification?: {
+    activeOn?: string[],
     score?: number,
     n?: number
   }
+  labels?: Object[],
+  sag?: boolean
 }
 
 @Injectable({
@@ -18,12 +22,17 @@ interface Credentials {
 export class GlobalVarsService {
   user:Credentials;
   labels:string[];
+  labelColorPallete:Object = {};
   mode:boolean; //toggle for the app theme
   forward = [];
   backward = [];
   progress:number;
 
-  constructor(private taskService: TaskService, private http: Http) { }
+  constructor(
+    private taskService: TaskService, 
+    private userService: UserService, 
+    private http: Http
+  ) { }
 
   setTheme(mode:boolean) {
     this.mode = mode;
@@ -56,16 +65,12 @@ export class GlobalVarsService {
       this.progress = 0;
 
     this.taskService.progressRefreshFilter(this.progress);
-    console.log("Inside service: " + this.user.gamification);
 
-    var headers = new Headers();
     var body = JSON.stringify({
       username: this.user.username, 
-      gamification: this.user.gamification
+      gamification: this.user.gamification,
     });
-    headers.append('Content-Type', 'application/json');
-    this.http.put("http://localhost:8080/users/updateSAS", body, {'headers': headers})
-    .subscribe((res) => {
+    this.userService.updateSAS(body).subscribe((res) => {
       console.log(res.json());
     });
   }

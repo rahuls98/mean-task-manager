@@ -12,6 +12,7 @@ import { GlobalVarsService } from "../../services/global-vars.service";
 })
 export class ViewTaskComponent implements OnInit {
   task:Task;
+  date:string;
 
   constructor(
     private taskService: TaskService,
@@ -19,6 +20,7 @@ export class ViewTaskComponent implements OnInit {
   ) { 
     this.taskService.viewTransferListen().subscribe((task: Task) => {
       this.task = task;
+      this.date = this.task.dueDate.toString().substr(0, 10)
     });
   }
 

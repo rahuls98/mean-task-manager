@@ -46,10 +46,11 @@
                             </div>
                             <select class="custom-select" [(ngModel)]="label" name="label" id="label">
                                 <option selected>-</option>
-                                <option value="Personal">Personal</option>
+                                <!-- <option value="Personal">Personal</option>
                                 <option value="Work">Work</option>
                                 <option value="Shopping">Shopping</option>
-                                <option value="Others">Others</option>
+                                <option value="Others">Others</option> -->
+                                <option value="{{ labelVar.name }}" *ngFor="let labelVar of labels">{{ labelVar.name }}</option>
                             </select>
                         </div>
 

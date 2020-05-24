@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-1">
                 <input class="form-check-input" type="checkbox" id="check" 
-                       (change)="toggleStatus()" [(ngModel)]="isChecked"/>
+                       (change)="toggleStatus()" [(ngModel)]="isChecked" [disabled]="isDisabled"/>
             </div>
             <div class="col-7">
                 <h5 id="title" [ngClass]="setCompletedClass()">{{ task.title }}</h5>
@@ -19,7 +19,8 @@
                 <span class="badge badge-pill badge-warning" *ngIf="isLate">Late!</span>
             </div>
             <div class="col-1 my-auto">
-                <div class="label" [ngClass]="setLabelClass()">
+                <!-- [ngClass]="setLabelClass()" -->
+                <div class="label" [style.color]="labelColor">
                     <span><i class="fa fa-tag"></i></span>
                     <!-- {{ task.label[0] }} -->
                 </div>

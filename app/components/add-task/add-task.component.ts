@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Task } from "../../models/task";
 import { ValidateService } from "../../services/validate.service";
 import { TaskService } from "../../services/task.service";
+import { UserService } from "../../services/user.service";
 import { GlobalVarsService } from "../../services/global-vars.service";
 import { FlashMessagesService } from 'angular2-flash-messages';
 
@@ -15,16 +16,28 @@ export class AddTaskComponent implements OnInit {
   date:Date;
   priority:String;
   label:String;
+  labels:Object[];
   //status:String;
 
   constructor(
     private taskService: TaskService,
+    private userService: UserService,
     private globalVarsService: GlobalVarsService,
     private validateService: ValidateService,
     private flashMessage: FlashMessagesService
-  ) { }
+  ) { 
+    this.userService.labelRefreshListen().subscribe((msg:string) => {
+      let username = this.globalVarsService.user.username;
+      this.userService.getLabels(username).subscribe((labelsArray) => {
+        if(labelsArray.success) {
+          this.labels = labelsArray.labels[0].labels;
+        }
+      }, err => { console.log(err); return false; })
+    }); 
+  }
 
   ngOnInit(): void {
+    this.labels = this.globalVarsService.getLabels();
   }
 
   toggleTheme() {

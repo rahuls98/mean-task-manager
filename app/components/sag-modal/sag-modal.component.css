@@ -3,18 +3,9 @@
     color: #2c003e;
 }
 .darkTheme .modal-content {
-    background: #252525;
+    background: #252525 !important;
     color: white;
     transition: 0.5s;
-}
-
-.modal-content {
-    padding: 50px !important;
-    font-size: 20px;
-}
-
-.modal-close-btn {
-    float: right;
 }
 
 .card {
@@ -36,7 +27,17 @@
     transition: 0.5s;
 }
 
+.modal-content {
+    padding: 50px !important;
+    font-size: 18px;
+}
+
+.modal-close-btn {
+    float: right;
+}
+
 button {
+    width: 120px;
     color: #e42c64 /* 2c003e #424874 */;
     border: #e42c64 /* 2c003e #424874 */ solid 1px;
     outline: none;
@@ -70,16 +71,6 @@ button:active {
     background: #29a19c ;
 }
 
-
-.l-ff304f {
-    color: #ff304f;
-}
-.l-002651 {
-    color: #002651;
-}
-.l-107a8b {
-    color: #107a8b;
-}
-.l-85203b {
-    color: #85203b;
+.darkTheme h4 {
+    color: #29a19c;
 }

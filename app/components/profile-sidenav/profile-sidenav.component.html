@@ -1,7 +1,7 @@
 <div class="container sidenav-contents" [ngClass]="toggleTheme()">
     <br>
     <div class="row">
-        <button (click)="onLogoutClick()">
+        <button class="btn" (click)="onLogoutClick()">
             Logout
         </button>
     </div>
@@ -20,23 +20,40 @@
     </div>
     <hr class="my-4">
     <br>
-    <div class="row">
-        <div class="col-12">
-            <p style="text-align: center">Square-Away Wizard level: 
-                <span class="badge badge-light" id="level-badge">{{ width }}</span>
-            </p>
-        </div><!-- 
-        <div class="col-2" style="text-align: right">
-            <h4><a><i class="fa fa-edit"></i></a></h4>
-        </div> -->
-    </div>
-    
-    <div class="progress">
-        <div class="progress-bar progress-bar-striped" role="progressbar" [style.width]="width" 
-             aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
+
+    <ng-container *ngIf="sag; then showScore; else showMsg"></ng-container>
+    <ng-template #showScore>
+        <div class="row">
+            <div class="col-10">
+                <p>Square-Away Wizard level: 
+                    <span class="badge badge-light" id="level-badge">{{ width }}</span>
+                </p>
+            </div>
+            <div class="col-2" style="text-align: right">
+                <p><a data-toggle="modal" data-target="#sag-modal"><i class="fa fa-edit"></i></a></p>
+            </div>
         </div>
-    </div>
-    <br><br>
+        <div class="progress">
+            <div class="progress-bar progress-bar-striped" role="progressbar" [style.width]="width" 
+                aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
+            </div>
+        </div>
+    </ng-template>
+    <ng-template #showMsg>
+        <div class="card text-center">
+            <div class="card-header">Featured</div>
+            <div class="card-body">
+                <h5 class="card-title">Square-Away gamification mode</h5>
+                <p class="card-text">Help us help you feel motivated to
+                    square away your tasks. Activate square away gamification
+                    on your account.
+                </p>
+                <br>
+                <button class="btn" type="button" data-toggle="modal" data-target="#sag-modal">Know more</button>
+            </div>
+        </div>
+        
+    </ng-template>
 
     <!-- <div class="card">
         <div class="card-header">

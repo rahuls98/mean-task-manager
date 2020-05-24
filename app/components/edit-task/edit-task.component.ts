@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Task } from '../../models/task';
 import { TaskService } from '../../services/task.service';
+import { UserService } from '../../services/user.service';
 import { GlobalVarsService } from "../../services/global-vars.service";
 import { FlashMessagesService } from 'angular2-flash-messages';
 
@@ -11,6 +12,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 })
 export class EditTaskComponent implements OnInit {
   task:Task;
+  labels:Object[];
 
   updTitle:String;
   updDate:Date;
@@ -19,12 +21,22 @@ export class EditTaskComponent implements OnInit {
 
   constructor(
     private taskService: TaskService,
+    private userService: UserService,
     private globalVarsService: GlobalVarsService,
     private flashMessage: FlashMessagesService) 
   {
     this.taskService.editTransferListen().subscribe((task:Task) => {
       this.task = task;
-    })
+    });
+
+    this.userService.labelRefreshListen().subscribe((msg:string) => {
+      let username = this.globalVarsService.user.username;
+      this.userService.getLabels(username).subscribe((labelsArray) => {
+        if(labelsArray.success) {
+          this.labels = labelsArray.labels[0].labels;
+        }
+      }, err => { console.log(err); return false; })
+    }); 
   }
 
   ngOnInit(): void {
@@ -37,6 +49,9 @@ export class EditTaskComponent implements OnInit {
       isDone: undefined,
       gamification: undefined
     };
+
+
+    this.labels = this.globalVarsService.getLabels();
   }
 
   toggleTheme() {

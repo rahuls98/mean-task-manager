@@ -14,6 +14,7 @@ export class ProfileSidenavComponent implements OnInit {
   @Input() username:string = "";
   width = '0%';
   @Input() progress:number;
+  sag: boolean;
   labels:string[];
 
   constructor(
@@ -29,8 +30,13 @@ export class ProfileSidenavComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log("setting progress");
-    this.width = String(Math.round(this.progress)) + "%";
+    if(this.globalVarsService.user.sag) {
+      this.sag = true;
+      console.log("setting progress");
+      this.width = String(Math.round(this.progress)) + "%";
+    } else {
+      this.sag = false
+    }
   }
 
   toggleTheme() {

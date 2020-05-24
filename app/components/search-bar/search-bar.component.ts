@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TaskService } from '../../services/task.service';
+import { UserService } from '../../services/user.service';
 import { GlobalVarsService } from '../../services/global-vars.service';
 
 @Component({
@@ -8,6 +9,8 @@ import { GlobalVarsService } from '../../services/global-vars.service';
   styleUrls: ['./search-bar.component.css']
 })
 export class SearchBarComponent implements OnInit {
+  labels:Object[];
+
   searchTitle:string;
   searchPriority:string;
   searchLabel:string;
@@ -15,10 +18,21 @@ export class SearchBarComponent implements OnInit {
 
   constructor(
     private taskService: TaskService,
+    private userService: UserService,
     private globalVarsService: GlobalVarsService,
-  ) { }
+  ) { 
+    this.userService.labelRefreshListen().subscribe((msg:string) => {
+    let username = this.globalVarsService.user.username;
+    this.userService.getLabels(username).subscribe((labelsArray) => {
+        if(labelsArray.success) {
+          this.labels = labelsArray.labels[0].labels;
+        }
+      }, err => { console.log(err); return false; })
+    });  
+  }
 
   ngOnInit(): void {
+    this.labels = this.globalVarsService.getLabels();
   }
 
   toggleTheme() {

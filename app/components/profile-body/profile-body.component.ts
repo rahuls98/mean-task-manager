@@ -2,6 +2,7 @@ import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { GlobalVarsService } from '../../services/global-vars.service';
 import { Task } from '../../models/task';
 import { TaskService } from '../../services/task.service';
+import { UserService } from '../../services/user.service';
 
 interface SearchObject {
   title: string;
@@ -28,10 +29,17 @@ export class ProfileBodyComponent implements OnInit {
   constructor(
     private globalVarsService: GlobalVarsService,
     private taskService: TaskService,
+    private userService: UserService,
   ) 
   {
+    this.getLabels();
+
     this.taskService.taskRefreshListen().subscribe((msg:string) => {
       this.getTasks('allTasks', null);
+    });
+
+    this.userService.labelRefreshListen().subscribe((msg:string) => {
+      this.getLabels();
     });
 
     this.taskService.searchTransferListen().subscribe((searchObj:SearchObject) => {
@@ -43,6 +51,18 @@ export class ProfileBodyComponent implements OnInit {
     this.globalVarsService.mode = false;
     this.title = "All Tasks"
     this.getTasks("allTasks", null);
+  }
+
+  getLabels() {
+    let username = this.globalVarsService.user.username;
+    this.userService.getLabels(username).subscribe((labelsArray) => {
+      if(labelsArray.success) {
+        labelsArray.labels[0].labels.forEach(label => {
+          this.globalVarsService.labelColorPallete[label.name] = label.color;
+        });
+        console.log(this.globalVarsService.labelColorPallete);
+      }
+    }, err => { console.log(err); return false; })
   }
 
   toggleTheme() {

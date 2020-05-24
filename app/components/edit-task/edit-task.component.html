@@ -44,16 +44,17 @@
                                 <label class="input-group-text" for="updLabel">Label</label>
                             </div>
                             <select class="custom-select" [(ngModel)]="updLabel" name="updLabel" id="updLabel" value="{{ task.label }}">
-                                <option value="Personal">Personal</option>
+                                <!-- <option value="Personal">Personal</option>
                                 <option value="Work">Work</option>
                                 <option value="Shopping">Shopping</option>
-                                <option value="Others">Others</option>
+                                <option value="Others">Others</option> -->
+                                <option value="{{ labelVar.name }}" *ngFor="let labelVar of labels">{{ labelVar.name }}</option>
                             </select>
                         </div>
                     </div>
                     <br><hr><br>
                     <div class="row" style="justify-content: space-evenly;">
-                        <div><button type="submit" class="btn btn-outline-danger">Update</button></div>
+                        <div><button type="submit">Update</button></div>
                     </div>
                 </form>
 
