@@ -91,7 +91,7 @@ export class EditTaskComponent implements OnInit {
 
     if(flag) {
       console.log(updateFields);
-      this.taskService.updateTask(this.task._id, updateFields)
+      this.taskService.updateTask(this.globalVarsService.user.username, this.task._id, updateFields)
       .subscribe(updateResults => {
         if(updateResults.success) {
           this.flashMessage.show("Task updated!", {

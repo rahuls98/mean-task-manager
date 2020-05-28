@@ -21,10 +21,12 @@ export class ProfileBodyComponent implements OnInit {
   defaultView:boolean;
   title:string;
   tasks:Task[];
+  emptyTaskList:boolean;
   options:boolean;
 
   opKeys = Object.keys;
-  opValues:Object;
+  opValues:Object = {};
+  emptyOpValues:boolean;
 
   constructor(
     private globalVarsService: GlobalVarsService,
@@ -35,6 +37,7 @@ export class ProfileBodyComponent implements OnInit {
     this.getLabels();
 
     this.taskService.taskRefreshListen().subscribe((msg:string) => {
+      console.log(msg);
       this.getTasks('allTasks', null);
     });
 
@@ -77,27 +80,29 @@ export class ProfileBodyComponent implements OnInit {
   getTasks(resultsOf:string, field:string) {
     
     if(resultsOf=="allTasks") {
-      this.taskService.getAllTasks()
+      this.taskService.getAllTasks(this.globalVarsService.user.username)
       .subscribe(allTasks => {
         this.title = "All tasks";
         this.options = true;
         this.defaultView = true;
         this.tasks = allTasks.tasks;
+        if(allTasks.tasks.length == 0) this.emptyTaskList = true;
       }, err => { console.log(err); return false;});
     }
 
     if(resultsOf=="filter") {
-      this.taskService.filterTasks(field.toLowerCase())
+      this.taskService.filterTasks(this.globalVarsService.user.username, field.toLowerCase())
       .subscribe(filteredTasks => {
         this.tasks = undefined;
         this.options = false;
         this.defaultView = false;
         this.opValues = filteredTasks;
+        if(Object.keys(filteredTasks).length == 0) this.emptyOpValues = true;
       }, err => { console.log(err); return false;});
     }
 
     if(resultsOf=="sort") {
-      this.taskService.sortTasks(field)
+      this.taskService.sortTasks(this.globalVarsService.user.username, field)
       .subscribe(sortedTasks => {
         this.options = false;
         this.defaultView = true;
@@ -130,7 +135,7 @@ export class ProfileBodyComponent implements OnInit {
 
     if(searchQuery != "?") {
       searchQuery = searchQuery.substr(0, searchQuery.length-1);
-      this.taskService.searchTask(searchQuery).subscribe(searchResults => {
+      this.taskService.searchTask(this.globalVarsService.user.username, searchQuery).subscribe(searchResults => {
         this.tasks = searchResults.tasks;
         this.title = "Search results";
         this.options = false;

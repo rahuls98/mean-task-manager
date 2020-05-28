@@ -1,10 +1,10 @@
 export class Task {
-    _id?: String;
-    title: String;
+    _id?: string;
+    title: string;
     dueDate: Date;
-    priority: String;
-    label: String;
-    status: String;
+    priority: string;
+    label: string;
+    status: string;
     isDone: boolean;
     gamification: {
         firstCheck: Date,

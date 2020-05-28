@@ -8,6 +8,7 @@ import { GlobalVarsService } from "../../services/global-vars.service";
   styleUrls: ['./sag-modal.component.css']
 })
 export class SagModalComponent implements OnInit {
+  sag:boolean;
   labels:Object[];
   labelName:string;
   selectedLabels:string[];
@@ -20,6 +21,7 @@ export class SagModalComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.sag = this.globalVarsService.user.sag;
     this.labels = this.globalVarsService.getLabels();
     this.selectedLabels = this.globalVarsService.user.gamification.activeOn;
     if(this.selectedLabels == [] || this.selectedLabels == undefined) this.activeOn=false;

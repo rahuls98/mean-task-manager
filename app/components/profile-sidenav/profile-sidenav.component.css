@@ -107,9 +107,12 @@ button.btn:active {
     transition: 0.5s;
 }
 
+.fa-edit {
+    font-size: 22px;
+}
 .fa-edit:hover {
     cursor: pointer;
-    color: blue;
+    transform: scale(1.2);
 }
 
 .card-body p {

@@ -7,13 +7,13 @@ interface Credentials {
   name?: string,
   username?: string
   email?: string,
+  labels?: Object[],
+  sag?: boolean,
   gamification?: {
     activeOn?: string[],
     score?: number,
     n?: number
   }
-  labels?: Object[],
-  sag?: boolean
 }
 
 @Injectable({
@@ -23,9 +23,7 @@ export class GlobalVarsService {
   user:Credentials;
   labels:string[];
   labelColorPallete:Object = {};
-  mode:boolean; //toggle for the app theme
-  forward = [];
-  backward = [];
+  mode:boolean;
   progress:number;
 
   constructor(

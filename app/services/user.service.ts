@@ -14,6 +14,7 @@ export class UserService {
 
   constructor(private http: Http,) { }
 
+  //LISTENERS and FILTERS
   private _sagRefresh = new Subject<any>();
   sagRefreshListen(): Observable<any> { return this._sagRefresh.asObservable(); }
   sagRefreshFilter(filterBy: string) { this._sagRefresh.next(filterBy) };
@@ -22,6 +23,7 @@ export class UserService {
   labelRefreshListen(): Observable<any> { return this._labelRefresh.asObservable(); }
   labelRefreshFilter(filterBy: string) { this._labelRefresh.next(filterBy) };
 
+  //API CALLS
   updateSAS(body):Observable<any> {
     var headers = new Headers();
     headers.append('Content-Type', 'application/json');

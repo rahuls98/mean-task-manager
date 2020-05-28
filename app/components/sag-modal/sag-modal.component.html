@@ -7,6 +7,49 @@
             </h5>
             <br>
             <div class="modal-body">
+                <ng-container *ngIf="sag; then noInfo; else info"></ng-container>
+                <ng-template #noInfo>
+                    <h4><strong>Editing gamification mode</strong></h4>
+                    <br>
+                    <p>
+                        Here you can add more labels to be considered for the gamification mode.
+                    </p>
+                    <div class="card">
+                        <div class="card-header">
+                            Square-Away gamification labels
+                            <a data-toggle="collapse" href="#collapseExample" role="button" style="float:right;">
+                                <button class="btn"><i class="fa fa-plus"></i></button>
+                            </a>
+                        </div>
+                        <div class="collapse" id="collapseExample">
+                            <div class="card card-body" style="padding: 20px 20px 10px 20px;">
+                                <form (submit)="activateGamification()">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <label class="input-group-text" for="label">Label</label>
+                                        </div>
+                                        <select class="custom-select" [(ngModel)]="labelName" name="labelName" id="labelName">
+                                            <option selected>-</option>
+                                            <option value="{{ labelVar.name }}" *ngFor="let labelVar of labels">{{ labelVar.name }}</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="row m-auto">
+                                        <button class="btn" type="submit">Activate</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <ul class="list-group list-group-flush" *ngFor="let slabel of selectedLabels; index as i">
+                            <li class="list-group-item"> 
+                                {{ slabel }} 
+                                <button class="btn" (click)="deleteLabel(slabel)" style="float:right"><i class="fa fa-trash"></i></button>
+                            </li>
+                        </ul>
+                    </div>
+                </ng-template>
+                
+                <ng-template #info>
                 <h4><strong>About</strong></h4>
                 <p>
                     Square Away Gamification mode is a feature that helps users feel
@@ -71,6 +114,9 @@
                         </li>
                     </ul>
                 </div>
+                </ng-template>
+
+
                 <!-- <form (submit)="activateGamification()">
                     <label>Select task categories to be considered for gamification</label>
                     <ul class="list-group" *ngFor="let labelVar of labels">

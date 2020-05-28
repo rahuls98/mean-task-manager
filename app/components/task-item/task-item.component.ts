@@ -31,7 +31,7 @@ export class TaskItemComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.labelColor = this.globalVarsService.labelColorPallete[this.task.label.toString()];
+    this.labelColor = this.globalVarsService.labelColorPallete[this.task.label];
     this.activeOn = this.globalVarsService.user.gamification.activeOn;
     console.log(this.labelColor);
     if(this.task.isDone) {
@@ -72,7 +72,7 @@ export class TaskItemComponent implements OnInit {
       isDone: this.task.isDone,
     }
 
-    if(this.activeOn.includes(this.task.label.toString())) {
+    if(this.activeOn.includes(this.task.label)) {
       let today = new Date().getTime();
       let due = new Date(this.task.dueDate).getTime();
       let diff = 24 * 3600 * 1000;
@@ -86,14 +86,14 @@ export class TaskItemComponent implements OnInit {
         this.globalVarsService.updateSAS('add', score);
       }
       else {
-        this.taskService.getTask(this.task._id).subscribe((tasks) => {
+        this.taskService.getTask(this.globalVarsService.user.username, this.task._id).subscribe((tasks) => {
           let prevScore = tasks.tasks["0"].gamification.score;
           this.globalVarsService.updateSAS('sub', prevScore);
         });
       }
     }
 
-    this.taskService.updateTaskStatus(updateObj)
+    this.taskService.updateTaskStatus(this.globalVarsService.user.username, updateObj)
     .subscribe(updateResult => {
         if(updateResult.success) { return true; }
       }, err => { console.log(err); return false; }
@@ -131,7 +131,7 @@ export class TaskItemComponent implements OnInit {
   }
 
   deleteTask() {
-    this.taskService.deleteTask(this.task._id)
+    this.taskService.deleteTask(this.globalVarsService.user.username, this.task._id)
     .subscribe(deleteResult => {
         if(deleteResult.success) {
           this.taskService.taskRefreshFilter("Task deleted!"); 

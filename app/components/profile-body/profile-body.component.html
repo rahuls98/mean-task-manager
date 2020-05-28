@@ -52,7 +52,8 @@
 
     <ng-container *ngIf="defaultView; then default; else results"></ng-container>
     <ng-template #default>
-            <ng-container *ngIf="tasks; then allTasks; else emptyList"></ng-container>
+            <ng-container *ngIf="emptyTaskList; then emptyList; else allTasks"></ng-container>
+            <ng-template #emptyList><div id="taskContainer" style="text-align: center;">NO TASKS!</div></ng-template>
             <ng-template #allTasks>
                 <div class="container" id="taskContainer">
                     <div *ngFor="let task of tasks">
@@ -62,11 +63,11 @@
                 <app-edit-task></app-edit-task>
                 <app-view-task></app-view-task>
             </ng-template>
-            <ng-template #emptyList><div id="taskContainer">NO TASKS!</div></ng-template>
     </ng-template>
 
     <ng-template #results>
-            <ng-container *ngIf="opValues; then cmdResults; else emptyResults"></ng-container>
+            <ng-container *ngIf="emptyOpValues; then emptyResults; else cmdResults"></ng-container>
+            <ng-template #emptyResults><div id="taskContainer" style="text-align: center;">NO RESULTS!</div></ng-template>
             <ng-template #cmdResults>
                 <div *ngFor="let key of opKeys(opValues)">
                     <div class="container">
@@ -82,7 +83,6 @@
                     <hr class="my-4">
                 </div>
             </ng-template>
-            <ng-template #emptyResults><div id="taskContainer">NO RESULTS!</div></ng-template>
     </ng-template>
     
     <br>

@@ -4,7 +4,7 @@ import { ValidateService } from "../../services/validate.service";
 import { TaskService } from "../../services/task.service";
 import { UserService } from "../../services/user.service";
 import { GlobalVarsService } from "../../services/global-vars.service";
-import { FlashMessagesService } from 'angular2-flash-messages';
+import { FlashMessagesService } from "angular2-flash-messages";
 
 @Component({
   selector: 'app-add-task',
@@ -12,10 +12,10 @@ import { FlashMessagesService } from 'angular2-flash-messages';
   styleUrls: ['./add-task.component.css']
 })
 export class AddTaskComponent implements OnInit {
-  title:String;
+  title:string;
   date:Date;
-  priority:String;
-  label:String;
+  priority:string;
+  label:string;
   labels:Object[];
   //status:String;
 
@@ -70,11 +70,11 @@ export class AddTaskComponent implements OnInit {
       });
       return false;
     }
-
-    this.taskService.addTask(newTask)
+    
+    this.taskService.addTask(this.globalVarsService.user.username, newTask)
     .subscribe(createResults => {
       if(createResults.success) {
-        this.flashMessage.show(createResults.msg, {
+        this.flashMessage.show("New task added!", {
           cssClass: 'alert-success', 
           timeout: 3000
         });
