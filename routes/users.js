@@ -64,29 +64,14 @@ router.get('/profile', passport.authenticate('jwt', {session:false}), (req, res,
     res.json({user: req.user});
 });
 
-router.put('/updateSAS', (req, res, next) => {
+router.put('/addLabel', (req, res, next) => {
     let username = req.body.username;
-    let gObj = req.body.gamification;
-    console.log(req.body);
-    User.updateSAS(username, gObj, (err, updateResult) => {
-        if(err)
-            res.json({success: false, msg: "Failed to update SAS!"});
+    let labelInfo = req.body.labelInfo;
+    User.addLabel(username, labelInfo, (err, updateResult) => {
+        if(err) 
+            res.json({success: false, msg: "Failed to update label info!"});
         else {
-            console.log("Updated SAS for: " + username);
-            res.json({success: true, update: updateResult});
-        }
-    })
-});
-
-router.put('/updateActiveOn', (req, res, next) => {
-    let username = req.body.username;
-    let activeOn = req.body.activeOn;
-    console.log(req.body);
-    User.updateActiveOn(username, activeOn, (err, updateResult) => {
-        if(err)
-            res.json({success: false, msg: "Failed to update activeOn!"});
-        else {
-            console.log("Updated activeOn for: " + username);
+            console.log("Updated label for: " + username);
             res.json({success: true, update: updateResult});
         }
     })
@@ -104,19 +89,6 @@ router.get('/getLabels/:username', (req, res, next) => {
     })
 })
 
-router.put('/addLabel', (req, res, next) => {
-    let username = req.body.username;
-    let labelInfo = req.body.labelInfo;
-    User.addLabel(username, labelInfo, (err, updateResult) => {
-        if(err) 
-            res.json({success: false, msg: "Failed to update label info!"});
-        else {
-            console.log("Updated label for: " + username);
-            res.json({success: true, update: updateResult});
-        }
-    })
-});
-
 router.put('/delLabel', (req, res, next) => {
     let username = req.body.username;
     let labels = req.body.labels;
@@ -129,5 +101,33 @@ router.put('/delLabel', (req, res, next) => {
         }
     })
 })
+
+router.put('/updateActiveOn', (req, res, next) => {
+    let username = req.body.username;
+    let activeOn = req.body.activeOn;
+    console.log(req.body);
+    User.updateActiveOn(username, activeOn, (err, updateResult) => {
+        if(err)
+            res.json({success: false, msg: "Failed to update activeOn!"});
+        else {
+            console.log("Updated activeOn for: " + username);
+            res.json({success: true, update: updateResult});
+        }
+    })
+});
+
+router.put('/updateSAS', (req, res, next) => {
+    let username = req.body.username;
+    let gObj = req.body.gamification;
+    console.log(req.body);
+    User.updateSAS(username, gObj, (err, updateResult) => {
+        if(err)
+            res.json({success: false, msg: "Failed to update SAS!"});
+        else {
+            console.log("Updated SAS for: " + username);
+            res.json({success: true, update: updateResult});
+        }
+    })
+});
 
 module.exports = router;

@@ -4,8 +4,10 @@ const Task = require('../models/task');
 
 module.exports = router;
 
-router.post('/create', (req, res, next) => {
+router.post('/:username/create', (req, res, next) => {
+    let username = req.params.username;
     let newTask = new Task({
+        username: username,
         title: req.body.title,
         dueDate: req.body.dueDate,
         priority: req.body.priority,
@@ -25,9 +27,22 @@ router.post('/create', (req, res, next) => {
     });
 });
 
-router.get('/read/:id', (req, res, next) => {
+router.get('/:username/read/:id', (req, res, next) => {
+    let username = req.params.username;
     let taskID = req.params.id;
-    Task.getTask(taskID, (err, tasks) => {
+    Task.getTask(username, taskID, (err, tasks) => {
+        if(err)
+            res.json({success: false, msg: "Failed to retrieve task!"});
+        else {
+            console.log("Retrieved task: " + tasks.length);
+            res.json({success: true, tasks: tasks});
+        }
+    });
+});
+
+router.get('/:username/readAll', (req, res, next) => {
+    let username = req.params.username;
+    Task.getAllTasks(username, (err, tasks) => {
         if(err)
             res.json({success: false, msg: "Failed to retrieve tasks!"});
         else {
@@ -37,22 +52,12 @@ router.get('/read/:id', (req, res, next) => {
     });
 });
 
-router.get('/readAll', (req, res, next) => {
-    Task.getAllTasks((err, tasks) => {
-        if(err)
-            res.json({success: false, msg: "Failed to retrieve tasks!"});
-        else {
-            console.log("Retrieved tasks: " + tasks.length);
-            res.json({success: true, tasks: tasks});
-        }
-    });
-});
-
-router.put('/updateStatus', (req, res, next) => {
+router.put('/:username/updateStatus', (req, res, next) => {
+    let username = req.params.username;
     let taskID = req.body._id;
     let task_isDone = req.body.isDone;
     let task_SAS = req.body.SAS;
-    Task.updateTaskStatus(taskID, task_SAS, task_isDone, (err, updateResult) => {
+    Task.updateTaskStatus(username, taskID, task_SAS, task_isDone, (err, updateResult) => {
         if(err)
             res.json({success: false, msg: "Failed to update task!"});
         else {
@@ -62,11 +67,12 @@ router.put('/updateStatus', (req, res, next) => {
     });
 });
 
-router.put('/update', (req, res, next) => {
+router.put('/:username/update', (req, res, next) => {
+    let username = req.params.username;
     let taskID = req.body._id;
     let taskUpd = req.body.taskUpd;
     console.log(taskUpd)
-    Task.updateTask(taskID, taskUpd, (err, updateResult) => {
+    Task.updateTask(username, taskID, taskUpd, (err, updateResult) => {
         if(err)
             res.json({success: false, msg: "Failed to update task!"});
         else {
@@ -76,9 +82,10 @@ router.put('/update', (req, res, next) => {
     })
 })
 
-router.delete('/delete/:id', (req, res, next) => {
+router.delete('/:username/delete/:id', (req, res, next) => {
+    let username = req.params.username;
     let taskId = req.params.id;
-    Task.deleteTask(taskId, (err, deleteResult) => {
+    Task.deleteTask(username, taskId, (err, deleteResult) => {
         if(err)
             res.json({success: false, msg: "Failed to delete task!"});
         else {
@@ -88,15 +95,17 @@ router.delete('/delete/:id', (req, res, next) => {
     });
 });
 
-router.get('/filter/:field', async (req, res, next) => {
+router.get('/:username/filter/:field', async (req, res, next) => {
+    let username = req.params.username;
     let filterField = req.params.field;
-    let filteredTasks = await Task.filterTasks(filterField);
+    let filteredTasks = await Task.filterTasks(username, filterField);
     res.send(filteredTasks);
 })
 
-router.get('/sort/:field', (req, res, next) => {
+router.get('/:username/sort/:field', (req, res, next) => {
+    let username = req.params.username;
     let sortBy = req.params.field
-    Task.sortTasks(sortBy, (err, sortedTasks) => {
+    Task.sortTasks(username, sortBy, (err, sortedTasks) => {
         if(err)
             res.json({success: false, msg: "Failed to sort tasks!"});
         else {
@@ -106,9 +115,10 @@ router.get('/sort/:field', (req, res, next) => {
     });
 });
 
-router.get('/search', (req, res, next) => {
+router.get('/:username/search', (req, res, next) => {
+    let username = req.params.username;
     var obj = req.query;
-    Task.searchTasks(obj, (err, tasks) => {
+    Task.searchTasks(username, obj, (err, tasks) => {
         if(err)
             res.json({success: false, msg: "Failed to find tasks!"});
         else {
@@ -118,7 +128,7 @@ router.get('/search', (req, res, next) => {
     })
 });
 
-router.get('/labels', (req, res, next) => {
+/* router.get('/labels', (req, res, next) => {
     Task.distinct('label', (err, labels) => {
         if(err)
             res.json({success: false, msg: "Failed to retrieve labels!"});
@@ -127,4 +137,4 @@ router.get('/labels', (req, res, next) => {
             res.json({success: true, labels: labels});
         }
     });
-});
+}); */
