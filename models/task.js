@@ -2,6 +2,10 @@ const mongoose = require('mongoose');
 
 //TASK SCHEMA
 const TaskSchema = mongoose.Schema({
+    username: {
+        type: String,
+        require: true
+    },
     title: {
         type: String,
         require: true
@@ -28,7 +32,7 @@ const TaskSchema = mongoose.Schema({
         require: true
     },
     gamification: {
-        firstCheck: {
+        checked: {
             type: Date,
             require: true
         },
@@ -51,15 +55,15 @@ module.exports.addTask = function(newTask, callback) {
     newTask.save(callback);
 };
 
-module.exports.getTask = function(taskID, callback) {
-    Task.find({ _id: taskID }, callback);
+module.exports.getTask = function(username, taskID, callback) {
+    Task.find({ username:username, _id: taskID }, callback);
 };
 
-module.exports.getAllTasks = function(callback) {
-    Task.find({}, callback);
+module.exports.getAllTasks = function(username, callback) {
+    Task.find({username: username}, callback);
 };
 
-module.exports.updateTaskStatus = function(taskID, task_SAS, task_isDone, callback) {
+module.exports.updateTaskStatus = function(username, taskID, task_SAS, task_isDone, callback) {
     var obj = {}
     if(task_isDone) {
         obj["status"] = "Completed";
@@ -76,27 +80,27 @@ module.exports.updateTaskStatus = function(taskID, task_SAS, task_isDone, callba
         obj["isDone"] = task_isDone;
     }
     console.log(obj);
-    Task.updateOne({ _id: taskID }, obj , callback);
+    Task.updateOne({ username: username, _id: taskID }, obj , callback);
 }
 
-module.exports.updateTask = function(taskID, taskUpd, callback) {
-    Task.updateOne({ _id: taskID }, taskUpd, callback);
+module.exports.updateTask = function(username, taskID, taskUpd, callback) {
+    Task.updateOne({ username:username, _id: taskID }, taskUpd, callback);
 }
 
-module.exports.deleteTask = function(taskId, callback) {
-    Task.deleteOne({ _id: taskId }, callback);
+module.exports.deleteTask = function(username, taskId, callback) {
+    Task.deleteOne({ username: username, _id: taskId }, callback);
 };
 
-getFieldValues = async function(filterField) {
-    let values = await Task.distinct(filterField);
+getFieldValues = async function(filterField, username) {
+    let values = await Task.distinct(filterField, {username: username});
     return await values;
 };
 
-module.exports.filterTasks = async function(filterField) {
-    let distinctValues = await getFieldValues(filterField);
+module.exports.filterTasks = async function(username, filterField) {
+    let distinctValues = await getFieldValues(filterField, username);
     var obj = {};
     for(let i=0; i<await distinctValues.length; i++) {
-        var filter = {};
+        var filter = {username: username};
         filter[filterField] = distinctValues[i];
         let filteredTask = await Task.find(filter);
         obj[distinctValues[i]] = await filteredTask;
@@ -104,11 +108,11 @@ module.exports.filterTasks = async function(filterField) {
     return obj;
 }
 
-module.exports.sortTasks = function(sortBy, callback) {
-    Task.find({}, callback).sort(sortBy);
+module.exports.sortTasks = function(username, sortBy, callback) {
+    Task.find({ username: username }, callback).sort(sortBy);
 }
 
-module.exports.searchTasks = function(queryParams, callback) {
+module.exports.searchTasks = function(username, queryParams, callback) {
     var pattern = "";
     if(queryParams.title) {
         var words = queryParams.title.split(' ');
@@ -117,5 +121,6 @@ module.exports.searchTasks = function(queryParams, callback) {
         });
         queryParams.title = {$regex: pattern, $options:"i"};
     };
+    queryParams["username"] = username;
     Task.find(queryParams, callback);
 }

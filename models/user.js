@@ -5,7 +5,8 @@ const config = require('../config/database');
 //USER SCHEMA
 const UserSchema = mongoose.Schema({
     name: {
-        type: String
+        type: String,
+        require: true
     },
     email: {
         type: String,
@@ -17,6 +18,14 @@ const UserSchema = mongoose.Schema({
     },
     password: {
         type: String,
+        require: true
+    },
+    labels: {
+        type: Array,
+        require: true
+    },
+    sag: {
+        type: Boolean,
         require: true
     },
     gamification: {
@@ -32,14 +41,6 @@ const UserSchema = mongoose.Schema({
             type: Number,
             require: true
         }
-    },
-    labels: {
-        type: Array,
-        require: true
-    },
-    sag: {
-        type: Boolean,
-        require: true
     }
 });
 
@@ -72,18 +73,6 @@ module.exports.comparePassword = function(candidatePassword, hash, callback) {
     })
 }
 
-module.exports.updateSAS = function(username, gObj ,callback) {
-    console.log("Inside user.js: " + username);
-    console.log(gObj);
-    User.updateOne({ username: username}, {gamification: gObj}, callback);
-}
-
-module.exports.updateActiveOn = function(username, activeOn ,callback) {
-    console.log("Inside user.js: " + username);
-    console.log(activeOn);
-    User.update({ username: username}, {$set: {"gamification.activeOn": activeOn, sag: true}}, callback);
-}
-
 module.exports.getLabels = function(username, callback) {
     User.find({username: username},  {labels: 1}, callback);
 }
@@ -95,4 +84,16 @@ module.exports.addLabel = function(username, labelInfo, callback) {
 
 module.exports.delLabel = function(username, labels, callback) {
     User.updateOne({ username: username}, {$set: {labels: labels}}, callback);
+}
+
+module.exports.updateSAS = function(username, gObj ,callback) {
+    console.log("Inside user.js: " + username);
+    console.log(gObj);
+    User.updateOne({ username: username}, {gamification: gObj}, callback);
+}
+
+module.exports.updateActiveOn = function(username, activeOn ,callback) {
+    console.log("Inside user.js: " + username);
+    console.log(activeOn);
+    User.update({ username: username}, {$set: {"gamification.activeOn": activeOn, sag: true}}, callback);
 }
