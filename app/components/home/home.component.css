@@ -5,3 +5,25 @@
 #register {
     margin-left: 10px;
 }
+
+.btn {
+    width: 120px;
+    color: #e42c64 /* 2c003e #424874 */;
+    border: #e42c64 /* 2c003e #424874 */ solid 1px;
+    outline: none;
+    transition: 0.5s;
+}
+.btn:hover {
+    background: #e42c64 /* 424874 */;
+    color: white;
+}
+.btn:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+.btn:active {
+    outline: none !important;
+    box-shadow: none !important;
+    background: #e42c64 /* 424874 */ ;
+    color: white;
+}

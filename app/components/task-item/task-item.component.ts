@@ -76,7 +76,9 @@ export class TaskItemComponent implements OnInit {
       let today = new Date().getTime();
       let due = new Date(this.task.dueDate).getTime();
       let diff = 24 * 3600 * 1000;
-      let score = Math.trunc((due - today)/diff) + 1;
+      let score;
+      if(((due - today)/diff) > 0) score = 2;
+      else score = Math.trunc((due - today)/diff) + 1;
       console.log("Score: " + score);
       if(score>2) score=2;
       if(score<0) score=0;

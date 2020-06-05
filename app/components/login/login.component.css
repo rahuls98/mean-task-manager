@@ -1,0 +1,26 @@
+button {
+    width: 120px;
+    color: #e42c64 /* 2c003e #424874 */;
+    border: #e42c64 /* 2c003e #424874 */ solid 1px;
+    outline: none;
+    transition: 0.5s;
+}
+button:hover {
+    background: #e42c64 /* 424874 */;
+    color: white;
+}
+button:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+button:active {
+    outline: none !important;
+    box-shadow: none !important;
+    background: #e42c64 /* 424874 */ ;
+    color: white;
+}
+
+h5 {
+    padding-bottom: 5px;
+    opacity: 0.9;
+}

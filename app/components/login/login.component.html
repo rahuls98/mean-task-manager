@@ -3,13 +3,16 @@
     <flash-messages></flash-messages>
     <div class="col-5 m-auto">
         <form class="form-signin" (submit)="onLoginSubmit($event)">
-            <h1 class="h3 mb-3 font-weight-normal" style="text-align: center;">Login</h1>
-            <hr class="my-4">
-            <input type="text" id="inputUsername" [(ngModel)]="username" name="username" class="form-control" placeholder="Username" required autofocus  autocomplete="off">
+            <br><br>
+            <h3 style="text-align: center;">Login</h3>
+            <br><br>
+            <h5>Username</h5>
+            <input type="text" id="inputUsername" [(ngModel)]="username" name="username" class="form-control" placeholder="Enter username" required autofocus  autocomplete="off">
             <br>
-            <input type="password" id="inputPassword" [(ngModel)]="password" name="password" class="form-control" placeholder="Password" required>
-            <br>
-            <button class="col-3 m-auto btn btn-lg btn-outline-primary btn-block" type="submit">Login</button>
+            <h5>Password</h5>
+            <input type="password" id="inputPassword" [(ngModel)]="password" name="password" class="form-control" placeholder="Enter password" required>
+            <br><br>
+            <button class="col-3 m-auto btn btn-lg btn-block" type="submit">Login</button>
         </form>
     </div>
 </div>
