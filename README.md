@@ -1,6 +1,12 @@
 # Square-Away
 
-Square-Away is a task manager app built using the mean stack. 
+Square-Away is a task manager app built using the MEAN stack. 
 
-- Demo: https://www.youtube.com/watch?v=Ri75UQSlJ50&feature=youtu.be
 - App: https://square-away.herokuapp.com/
+
+<table>
+  <tr>
+    <td><img src="./images/Light-theme.png"></td>
+    <td><img src="./images/Dark-theme.png"></td>
+  </tr>
+</table>
